@@ -1,0 +1,23 @@
+@font-face {
+   font-family: "Hammersmith One";
+   src: url("HammersmithOne-Regular.ttf");
+}
+
+.label {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 12;
+   -fx-alignment: center-left;
+   -fx-text-fill: #373737;
+}
+
+.new-button {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-background-color: #06FFD5;
+   -fx-background-radius: 25;
+   -fx-padding: 10;
+}
+
+.new-button:pressed {
+   -fx-background-color: #00b395;
+}
