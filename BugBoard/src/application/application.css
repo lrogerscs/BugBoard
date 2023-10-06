@@ -10,7 +10,7 @@
    -fx-text-fill: #373737;
 }
 
-.new-button {
+.button {
    -fx-font-family: "Hammersmith One";
    -fx-font-size: 14;
    -fx-background-color: #06FFD5;
@@ -18,6 +18,6 @@
    -fx-padding: 10;
 }
 
-.new-button:pressed {
+.button:pressed {
    -fx-background-color: #00b395;
 }
