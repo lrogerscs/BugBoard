@@ -1,0 +1,49 @@
+@font-face {
+   font-family: "Hammersmith One";
+   src: url("../font/HammersmithOne-Regular.ttf");
+}
+
+.label {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 16;
+   -fx-alignment: center-left;
+   -fx-text-fill: #373737;
+}
+
+.button {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-background-color: #06FFD5;
+   -fx-background-radius: 25;
+   -fx-padding: 10;
+}
+
+.button:pressed {
+   -fx-background-color: #00b395;
+}
+
+.text-field {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-text-fill: #BBBBBB;
+   -fx-border-color: transparent;
+   -fx-background-color: #EEEFEF;
+   -fx-background-radius: 5;
+}
+
+.date-picker {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-text-fill: #BBBBBB;
+   -fx-border-color: transparent;
+   -fx-background-color: #EEEFEF;
+   -fx-background-radius: 5;
+}
+
+.date-picker > .arrow-button {
+    -fx-background-color: #EEEFEF;
+}
+
+.date-picker > .arrow-button > .arrow {
+    -fx-background-color: #373737;
+}

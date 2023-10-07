@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<VBox alignment="TOP_CENTER" prefHeight="900" prefWidth="1600" style="-fx-background-color: #ffffff;" stylesheets="@application.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLDocumentController">
+<VBox alignment="TOP_CENTER" prefHeight="900" prefWidth="1600" style="-fx-background-color: #ffffff;" stylesheets="@../css/application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.controller.FXMLDocumentController">
    <children>
       <HBox prefHeight="65.0" prefWidth="1600.0">
          <children>
@@ -27,7 +27,7 @@
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0">
                            <image>
-                              <Image url="@BugBoardIcon.png" />
+                              <Image url="@../image/BugBoardIcon.png" />
                            </image>
                         </ImageView>
                         <Label style="-fx-font-size: 30;" text="BugBoard" />
