@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.fxml.FXMLLoader;
 
 /**
- * Main loads the default FXML file, sets window name.
+ * Main loads the default FXML file, sets window name/icon.
  */
 public class Main extends Application {
    @Override
