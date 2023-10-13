@@ -16,7 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 /**
- * FXMLDocumentController controls the behavior of FXML files.
+ * HomeController controls the behavior of home.fxml.
  */
 public class HomeController implements Initializable {
    @FXML

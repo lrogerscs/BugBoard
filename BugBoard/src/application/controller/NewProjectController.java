@@ -14,6 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 
+/**
+ * NewProjectController controls the behavior of new_project.fxml.
+ */
 public class NewProjectController implements Initializable {
    @FXML
    private DatePicker datePicker;

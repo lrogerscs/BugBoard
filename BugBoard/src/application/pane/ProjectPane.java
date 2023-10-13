@@ -3,6 +3,9 @@ package application.pane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/**
+ * ProjectPane displays project information inside a container.
+ */
 public class ProjectPane extends HBox {
    Label name;
    Label start;
