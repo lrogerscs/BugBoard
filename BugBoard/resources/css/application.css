@@ -31,6 +31,19 @@
    -fx-background-radius: 5;
 }
 
+.text-area {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-text-fill: #BBBBBB;
+   -fx-border-color: transparent;
+   -fx-background-color: #EEEFEF;
+   -fx-background-radius: 5;
+}
+
+.text-area .content {
+   -fx-background-color: #EEEFEF;
+}
+
 .date-picker {
    -fx-font-family: "Hammersmith One";
    -fx-font-size: 14;
@@ -46,4 +59,12 @@
 
 .date-picker > .arrow-button > .arrow {
    -fx-background-color: #373737;
+}
+
+.project-pane {
+   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 5);
+   -fx-padding: 10;
+   -fx-spacing: 50;
+   -fx-background-color: #ffffff;
+   -fx-background-radius: 5;
 }

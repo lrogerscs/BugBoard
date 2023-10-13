@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<VBox alignment="TOP_CENTER" prefHeight="900" prefWidth="1600" style="-fx-background-color: #ffffff;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.FXMLDocumentController">
+<VBox alignment="TOP_CENTER" prefHeight="900" prefWidth="1600" style="-fx-background-color: #ffffff;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HomeController">
    <children>
       <HBox prefHeight="65.0" prefWidth="1600.0">
          <children>
@@ -60,5 +60,9 @@
             </AnchorPane>
          </children>
       </HBox>
+      <VBox fx:id="projectPanelPane" prefHeight="563.0" prefWidth="1600.0">
+         <padding>
+            <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+         </padding></VBox>
    </children>
 </VBox>
