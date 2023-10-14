@@ -42,6 +42,8 @@ public class HomeController implements Initializable {
    @Override
    public void initialize(URL location, ResourceBundle resources) {
       // Add projects to the display.
+      //projectPanelPane.getChildren().add(new ProjectPane("test project", "10/10/2023"));
+	  //Change the arguments to the .add method to project.getName() and project.getDate
       projectPanelPane.getChildren().add(new ProjectPane("test project", "10/10/2023"));
    }
 }

@@ -1,17 +1,25 @@
 package application;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Project 
 {
 	private String name;
-	private Date startDate;	//the Date type may be useful, but may be better simply as a String or int
+	private LocalDate startDate;	//the Date type may be useful, but may be better simply as a String or int
 	private String description;
 	private List<Ticket> tickets;	//list of ticket objects
 	private boolean empty;	//denotes if a project has tickets or not
 	
-	private String getName() 
+	public Project(String name, LocalDate startDate, String description)
+	{
+		//May be better to directly assign the instance variable values as opposed to using the getters/setters?
+		this.setName(name);
+		this.setDate(startDate);
+		this.setDescription(description);
+	}
+
+	protected String getName() 
 	{
 		return name;
 	}
@@ -21,7 +29,17 @@ public class Project
 		this.name = name;
 	}
 	
-	private String getDescription()
+	protected LocalDate getDate()
+	{
+		return startDate;
+	}
+	
+	private void setDate(LocalDate startDate)
+	{
+		this.startDate = startDate;
+	}
+	
+	protected String getDescription()
 	{
 		return description;
 	}
@@ -31,14 +49,14 @@ public class Project
 		this.description = description;
 	}
 	
-	private List<Ticket> getTickets()
+	protected List<Ticket> getTickets()
 	{
 		return tickets;
 	}
 	
 	private void setTickets()
 	{
-		//Needs logic to add and remove ticket objects from the List tickets
+		//Needs logic to add and remove ticket objects from the tickets List
 	}
 	
 	private boolean getEmpty()

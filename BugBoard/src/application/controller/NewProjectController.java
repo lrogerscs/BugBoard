@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import application.Project;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -20,6 +23,12 @@ import javafx.stage.Stage;
 public class NewProjectController implements Initializable {
    @FXML
    private DatePicker datePicker;
+   
+   @FXML
+   private TextField projectName;
+
+   @FXML
+   private TextArea projectDesc;
    
    /**
     * On action, switches the current view to the home view.
@@ -35,6 +44,9 @@ public class NewProjectController implements Initializable {
          stage.show();
          
          // TODO: Save inputs/call appropriate method here.
+         //Instantiate a Project object and populate the appropriate fields with the user input (use a constructor)
+         Project project = new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText());
+         
       } catch (Exception e) {
          e.printStackTrace();
       }
