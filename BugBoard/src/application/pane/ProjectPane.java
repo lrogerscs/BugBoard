@@ -1,5 +1,6 @@
 package application.pane;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
@@ -8,13 +9,21 @@ import javafx.scene.layout.HBox;
  */
 public class ProjectPane extends HBox {
    Label name;
-   Label start;
+   Label date;
    
-   public ProjectPane(String name, String start) {
+   public ProjectPane(String name, String date) {
       this.name = new Label(name);
-      this.start = new Label(start);
+      this.date = new Label(date);
       
-      getChildren().addAll(this.name, this.start);
+      // Placeholder formatting.
+      this.name.setAlignment(Pos.CENTER_LEFT);
+      this.date.setAlignment(Pos.CENTER_LEFT);
+      this.name.setPrefWidth(200);
+      this.date.setPrefWidth(200);
+      this.name.setMaxWidth(200);
+      this.date.setMaxWidth(200);
+      
+      getChildren().addAll(this.name, this.date);
       
       // Set style class.
       getStyleClass().add("project-pane");

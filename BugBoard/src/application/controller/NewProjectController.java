@@ -2,9 +2,12 @@ package application.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import application.Project;
+import application.project.Project;
+import application.reader.ProjectReader;
+import application.writer.ProjectWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +33,10 @@ public class NewProjectController implements Initializable {
    @FXML
    private TextArea projectDesc;
    
+   private ProjectReader projectReader;
+   private ProjectWriter projectWriter;
+   private List<Project> projects;
+   
    /**
     * On action, switches the current view to the home view.
     * @param event Action event.
@@ -37,16 +44,21 @@ public class NewProjectController implements Initializable {
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
-         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));;
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/home.fxml"));
+         Parent root = fxmlLoader.load();
          Scene scene = new Scene(root);
          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
          stage.setScene(scene);
          stage.show();
          
-         // TODO: Save inputs/call appropriate method here.
-         //Instantiate a Project object and populate the appropriate fields with the user input (use a constructor)
-         Project project = new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText());
+         HomeController homeController = fxmlLoader.getController();
          
+         // Save data.
+         projects.add(new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText()));
+         projectWriter.writeProjects(projects, "data/project_data.csv");
+         
+         // Update home.fxml.
+         homeController.update();
       } catch (Exception e) {
          e.printStackTrace();
       }
@@ -54,6 +66,10 @@ public class NewProjectController implements Initializable {
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
+      projectReader = new ProjectReader();
+      projectWriter = new ProjectWriter();
+      
+      projects = projectReader.readProjects("data/project_data.csv");
       datePicker.setValue(LocalDate.now());
    }
 }

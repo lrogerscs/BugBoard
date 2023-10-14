@@ -1,12 +1,14 @@
-package application;
+package application.project;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import application.ticket.Ticket;
+
 public class Project 
 {
 	private String name;
-	private LocalDate startDate;	//using the LocalDate type because the new_project.fxml calendar object returns user input as a LocalDate type
+	private LocalDate startDate; //using the LocalDate type because the new_project.fxml calendar object returns user input as a LocalDate type
 	private String description;
 	private List<Ticket> tickets;	//list of ticket objects
 	private boolean empty;	//denotes if a project has tickets or not
@@ -19,52 +21,52 @@ public class Project
 		this.setDescription(description);
 	}
 
-	protected String getName() 
+	public String getName() 
 	{
 		return name;
 	}
 	
-	private void setName(String name) 
+	public void setName(String name) 
 	{
 		this.name = name;
 	}
 	
-	protected LocalDate getDate()
+	public LocalDate getDate()
 	{
 		return startDate;
 	}
 	
-	private void setDate(LocalDate startDate)
+	public void setDate(LocalDate startDate)
 	{
 		this.startDate = startDate;
 	}
 	
-	protected String getDescription()
+	public String getDescription()
 	{
 		return description;
 	}
 	
-	private void setDescription(String description)
+	public void setDescription(String description)
 	{
 		this.description = description;
 	}
 	
-	protected List<Ticket> getTickets()
+	public List<Ticket> getTickets()
 	{
 		return tickets;
 	}
 	
-	private void setTickets()
+	public void setTickets()
 	{
 		//Needs logic to add and remove ticket objects from the tickets List
 	}
 	
-	private boolean getEmpty()
+	public boolean getEmpty()
 	{
 		return empty;
 	}
 	
-	private void setEmpty(boolean empty)
+	public void setEmpty(boolean empty)
 	{
 		this.empty = empty;
 	}
