@@ -43,7 +43,8 @@ public class HomeController implements Initializable {
    public void initialize(URL location, ResourceBundle resources) {
       // Add projects to the display.
       //projectPanelPane.getChildren().add(new ProjectPane("test project", "10/10/2023"));
-	  //Change the arguments to the .add method to project.getName() and project.getDate
+	  //Change the arguments of the .add method to project.getName() and project.getDate somehow. Currently the project object from the 
+	  // NewProjectController is not within the scope here and cannot be accessed.
       projectPanelPane.getChildren().add(new ProjectPane("test project", "10/10/2023"));
    }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public class Project 
 {
 	private String name;
-	private LocalDate startDate;	//the Date type may be useful, but may be better simply as a String or int
+	private LocalDate startDate;	//using the LocalDate type because the new_project.fxml calendar object returns user input as a LocalDate type
 	private String description;
 	private List<Ticket> tickets;	//list of ticket objects
 	private boolean empty;	//denotes if a project has tickets or not
