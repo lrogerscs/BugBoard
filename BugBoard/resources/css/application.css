@@ -64,7 +64,7 @@
 .project-pane {
    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 5);
    -fx-padding: 10;
-   -fx-spacing: 50;
+   -fx-spacing: 10;
    -fx-background-color: #ffffff;
    -fx-background-radius: 5;
 }

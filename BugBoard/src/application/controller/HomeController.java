@@ -7,9 +7,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.pane.ProjectPane;
+import application.project.Project;
+import application.reader.ProjectReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +24,9 @@ import javafx.fxml.Initializable;
 public class HomeController implements Initializable {
    @FXML
    private VBox projectPanelPane;
+   
+   private ProjectReader projectReader;
+   private List<Project> projects;
    
    /**
     * On action, switches the current view to the project view.
@@ -38,13 +44,23 @@ public class HomeController implements Initializable {
          e.printStackTrace();
       }
    }
+   
+   /**
+    * Updates projects.
+    */
+   public void update() {
+      projects = projectReader.readProjects("data/project_data.csv");
+      projectPanelPane.getChildren().clear();
+      for (Project project : projects)
+         projectPanelPane.getChildren().add(new ProjectPane(project.getName(), project.getDate().toString()));
+   }
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
       // Add projects to the display.
-      //projectPanelPane.getChildren().add(new ProjectPane("test project", "10/10/2023"));
-	  //Change the arguments of the .add method to project.getName() and project.getDate somehow. Currently the project object from the 
-	  // NewProjectController is not within the scope here and cannot be accessed.
-      projectPanelPane.getChildren().add(new ProjectPane("test project", "10/10/2023"));
+      projectReader = new ProjectReader();
+      projects = projectReader.readProjects("data/project_data.csv");
+      for (Project project : projects)
+         projectPanelPane.getChildren().add(new ProjectPane(project.getName(), project.getDate().toString()));
    }
 }
