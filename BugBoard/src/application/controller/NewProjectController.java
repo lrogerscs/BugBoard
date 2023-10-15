@@ -44,21 +44,19 @@ public class NewProjectController implements Initializable {
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
+         if (projectName.getText() == null || projectName.getText().isEmpty() || datePicker.getValue() == null)
+            return;
+         
+         // Save data.
+         projects.add(new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText()));
+         projectWriter.writeProjects(projects, "data/project_data.csv");
+         
          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/home.fxml"));
          Parent root = fxmlLoader.load();
          Scene scene = new Scene(root);
          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
          stage.setScene(scene);
          stage.show();
-         
-         HomeController homeController = fxmlLoader.getController();
-         
-         // Save data.
-         projects.add(new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText()));
-         projectWriter.writeProjects(projects, "data/project_data.csv");
-         
-         // Update home.fxml.
-         homeController.update();
       } catch (Exception e) {
          e.printStackTrace();
       }

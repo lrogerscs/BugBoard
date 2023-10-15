@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<VBox fx:id="vBox" alignment="TOP_CENTER" prefHeight="900" prefWidth="1600" style="-fx-background-color: #ffffff;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewProjectController">
+<VBox alignment="TOP_CENTER" prefHeight="900" prefWidth="1600" style="-fx-background-color: #ffffff;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewProjectController">
    <children>
       <HBox prefHeight="65.0" prefWidth="1600.0">
          <children>

@@ -29,7 +29,7 @@ public class ProjectReader {
          
          for (String line : lines) {
             data = line.split(",");
-            projects.add(new Project(data[0], LocalDate.parse(data[1]), data[2]));
+            projects.add(new Project(data[0], LocalDate.parse(data[1]), data.length > 2 ? data[2] : ""));
          }
       } catch (Exception e) {
          e.printStackTrace();

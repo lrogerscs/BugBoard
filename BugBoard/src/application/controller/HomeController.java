@@ -44,16 +44,6 @@ public class HomeController implements Initializable {
          e.printStackTrace();
       }
    }
-   
-   /**
-    * Updates projects.
-    */
-   public void update() {
-      projects = projectReader.readProjects("data/project_data.csv");
-      projectPanelPane.getChildren().clear();
-      for (Project project : projects)
-         projectPanelPane.getChildren().add(new ProjectPane(project.getName(), project.getDate().toString()));
-   }
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
