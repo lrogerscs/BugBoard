@@ -12,11 +12,11 @@ public class ProjectWriter {
    /**
     * Writes project data.
     * @param projects Projects to write.
-    * @param localFile Destination file.
+    * @param localFilePath Destination file path.
     */
-   public void writeProjects(List<Project> projects, String localFile) {
+   public void writeProjects(List<Project> projects, String localFilePath) {
       try {
-         FileOutputStream stream = new FileOutputStream(getClass().getClassLoader().getResource(localFile).getFile());
+         FileOutputStream stream = new FileOutputStream(localFilePath);
          for (Project project : projects)
             stream.write((project.getName() + "," + project.getDate().toString() + "," + project.getDescription() + "\n").getBytes());
          stream.close();

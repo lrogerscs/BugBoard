@@ -49,7 +49,7 @@ public class HomeController implements Initializable {
    public void initialize(URL location, ResourceBundle resources) {
       // Add projects to the display.
       projectReader = new ProjectReader();
-      projects = projectReader.readProjects("data/project_data.csv");
+      projects = projectReader.readProjects("./data/project_data.csv");
       for (Project project : projects)
          projectPanelPane.getChildren().add(new ProjectPane(project.getName(), project.getDate().toString()));
    }

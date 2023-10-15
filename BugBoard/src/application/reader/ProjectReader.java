@@ -14,14 +14,14 @@ import application.project.Project;
 public class ProjectReader {
    /**
     * Reads in project data and returns a list of Project items.
-    * @param localFile Local file to read from.
+    * @param localFilePath Local file path to read from.
     * @return List of projects.
     */
-   public List<Project> readProjects(String localFile) {
+   public List<Project> readProjects(String localFilePath) {
       List<Project> projects = new ArrayList<Project>();
       
       try {
-         List<String> lines = Files.readAllLines(Paths.get(getClass().getClassLoader().getResource(localFile).toURI()));
+         List<String> lines = Files.readAllLines(Paths.get(localFilePath));
          String[] data;
          
          if (lines.size() < 1)

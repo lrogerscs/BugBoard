@@ -49,7 +49,7 @@ public class NewProjectController implements Initializable {
          
          // Save data.
          projects.add(new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText()));
-         projectWriter.writeProjects(projects, "data/project_data.csv");
+         projectWriter.writeProjects(projects, "./data/project_data.csv");
          
          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/home.fxml"));
          Parent root = fxmlLoader.load();
@@ -67,7 +67,7 @@ public class NewProjectController implements Initializable {
       projectReader = new ProjectReader();
       projectWriter = new ProjectWriter();
       
-      projects = projectReader.readProjects("data/project_data.csv");
+      projects = projectReader.readProjects("./data/project_data.csv");
       datePicker.setValue(LocalDate.now());
    }
 }

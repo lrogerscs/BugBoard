@@ -68,3 +68,9 @@
    -fx-background-color: #ffffff;
    -fx-background-radius: 5;
 }
+
+.project-pane-label {
+   -fx-alignment: center-left;
+   -fx-pref-width: 200;
+   -fx-max-width: 200;
+}
