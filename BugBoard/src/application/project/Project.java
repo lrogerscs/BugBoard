@@ -5,6 +5,10 @@ import java.util.List;
 
 import application.ticket.Ticket;
 
+
+/**
+ * Project class stores project name, start date, description, and list of Ticket objects (and an empty boolean if none in the list)
+ */
 public class Project 
 {
 	private String name;
@@ -58,6 +62,7 @@ public class Project
 	
 	public void setTickets()
 	{
+		//TODO
 		//Needs logic to add and remove ticket objects from the tickets List
 	}
 	
