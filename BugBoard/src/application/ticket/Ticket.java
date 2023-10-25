@@ -6,8 +6,6 @@ import java.util.List;
  */
 public class Ticket 
 {
-	//TODO
-	//Implement ticket class to reflect UML diagram (getters, setters, text instance variable, etc)
 	private String title;
 	private String description;
 	private List<String> comments;
