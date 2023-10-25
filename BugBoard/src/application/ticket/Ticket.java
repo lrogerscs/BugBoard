@@ -6,9 +6,20 @@ import java.util.List;
  */
 public class Ticket 
 {
+	private String name;
 	private String title;
 	private String description;
 	private List<String> comments;
+	
+	public String getName() 
+	{
+		return name;
+	}
+
+	public void setName(String name) 
+	{
+		this.name = name;
+	}
 	
 	public String getTitle()
 	{
@@ -39,4 +50,5 @@ public class Ticket
 	{
 		this.comments = comments;
 	}
+
 }
