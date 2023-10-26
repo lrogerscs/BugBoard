@@ -1,7 +1,6 @@
 package application.pane;
 
 import application.comment.Comment;
-import application.controller.EditProjectController;
 import application.controller.NewCommentController;
 import application.project.Project;
 import application.ticket.Ticket;
