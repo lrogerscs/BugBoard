@@ -29,13 +29,30 @@ public class HomeController implements Initializable {
    private List<Project> projects;
    
    /**
-    * On action, switches the current view to the project view.
+    * On action, switches the current view to the new project view.
     * @param event Action event.
     */
    @FXML
    private void onNewProjectButtonClick(ActionEvent event) {
       try {
          Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/new_project.fxml"));
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+         stage.show();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   /**
+    * On action, switches the current view to the new ticket view.
+    * @param event Action event.
+    */
+   @FXML
+   private void onNewTicketButtonClick(ActionEvent event) {
+      try {
+         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/new_ticket.fxml"));
          Scene scene = new Scene(root);
          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
          stage.setScene(scene);
@@ -51,6 +68,6 @@ public class HomeController implements Initializable {
       projectReader = new ProjectReader();
       projects = projectReader.readProjects("./data/project_data.csv");
       for (Project project : projects)
-         projectPanelPane.getChildren().add(new ProjectPane(project.getName(), project.getDate().toString()));
+         projectPanelPane.getChildren().add(new ProjectPane(project));
    }
 }

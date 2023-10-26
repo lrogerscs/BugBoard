@@ -1,32 +1,37 @@
 package application.comment;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Comment class stores comments that belong to a ticket within a project to keep track of notes needed for that given ticket
  */
 public class Comment
 {
-	private String text;
-	private LocalDate date;
+	private String desc;
+	private LocalDateTime dateTime;
 	
-	public String getText()
-	{
-		return text;
+	public Comment(String desc, LocalDateTime date) {
+	   this.desc = desc;
+	   this.dateTime = date;
 	}
 	
-	public void setText(String text)
+	public String getDesc()
 	{
-		this.text = text;
+		return desc;
 	}
 	
-	public LocalDate getDate()
+	public void setDesc(String text)
 	{
-		return date;
+		this.desc = text;
 	}
 	
-	public void setDate(LocalDate date)
+	public LocalDateTime getDateTime()
 	{
-		this.date = date;
+		return dateTime;
+	}
+	
+	public void setDateTime(LocalDateTime date)
+	{
+		this.dateTime = date;
 	}
 	
 }

@@ -13,16 +13,15 @@ public class Project
 {
 	private String name;
 	private LocalDate startDate; //using the LocalDate type because the new_project.fxml calendar object returns user input as a LocalDate type
-	private String description;
+	private String desc;
 	private List<Ticket> tickets;	//list of ticket objects
 	private boolean empty;	//denotes if a project has tickets or not
 	
-	public Project(String name, LocalDate startDate, String description)
+	public Project(String name, LocalDate startDate, String desc)
 	{
-		//May be better to directly assign the instance variable values as opposed to using the getters/setters?
-		this.setName(name);
-		this.setDate(startDate);
-		this.setDescription(description);
+	   this.name = name;
+	   this.startDate = startDate;
+	   this.desc = desc;
 	}
 
 	public String getName() 
@@ -45,14 +44,14 @@ public class Project
 		this.startDate = startDate;
 	}
 	
-	public String getDescription()
+	public String getDesc()
 	{
-		return description;
+		return desc;
 	}
 	
-	public void setDescription(String description)
+	public void setDesc(String description)
 	{
-		this.description = description;
+		this.desc = description;
 	}
 	
 	public List<Ticket> getTickets()

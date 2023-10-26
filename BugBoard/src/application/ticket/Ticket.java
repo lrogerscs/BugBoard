@@ -1,24 +1,33 @@
 package application.ticket;
 import java.util.List;
 
+import application.comment.Comment;
+
 /**
  * Ticket class stores bug information pertaining to a given project including a title, description, and any comments
  */
 public class Ticket 
 {
-	private String name;
+	private String projectName;
 	private String title;
 	private String description;
-	private List<String> comments;
+	private List<Comment> comments;
 	
-	public String getName() 
+	public Ticket(String projectName, String title, String description, List<Comment> comments) {
+	   this.projectName = projectName;
+	   this.title = title;
+	   this.description = description;
+	   this.comments = comments;
+	}
+	
+	public String getProjectName() 
 	{
-		return name;
+		return projectName;
 	}
 
 	public void setName(String name) 
 	{
-		this.name = name;
+		this.projectName = name;
 	}
 	
 	public String getTitle()
@@ -41,12 +50,12 @@ public class Ticket
 		this.description = description;
 	}
 	
-	public List<String> getComments()
+	public List<Comment> getComments()
 	{
 		return comments;
 	}
 	
-	public void setComments(List<String> comments)
+	public void setComments(List<Comment> comments)
 	{
 		this.comments = comments;
 	}

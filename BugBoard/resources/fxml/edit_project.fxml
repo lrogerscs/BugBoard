@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="900.0" prefWidth="1600.0" styleClass="base-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.EditProjectController">
+   <children>
+      <HBox prefHeight="65.0" prefWidth="1600.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="800.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="250.0" spacing="10.0" styleClass="logo-pane">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                           <image>
+                              <Image url="@../image/BugBoardIcon.png" />
+                           </image>
+                        </ImageView>
+                        <Label style="-fx-font-size: 30;" text="BugBoard" />
+                     </children>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="800.0" spacing="10.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </HBox>
+      <VBox prefHeight="770.0" prefWidth="100.0" spacing="10.0">
+         <children>
+            <Label style="-fx-font-size: 25;" text="Project Information" />
+            <HBox prefHeight="765.0" prefWidth="1580.0">
+               <children>
+                  <VBox prefHeight="139.0" prefWidth="790.0">
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="Project Name:" />
+                              <TextField fx:id="projectName" editable="false" focusTraversable="false" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="Start Date:" />
+                              <DatePicker fx:id="projectStartDate" editable="false" mouseTransparent="true" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <VBox prefHeight="224.0" prefWidth="1580.0" spacing="10.0">
+                           <children>
+                              <Label text="Project Description:" />
+                              <TextArea fx:id="projectDesc" editable="false" maxHeight="200.0" maxWidth="500.0" prefHeight="200.0" prefWidth="500.0" styleClass="text-area" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="790.0">
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="Tickets:" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <VBox fx:id="ticketPanelPane" prefHeight="682.0" prefWidth="790.0" spacing="10.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <HBox prefHeight="65.0" prefWidth="1600.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="800.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onSaveButtonClick" text="Save" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="800.0" spacing="10.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

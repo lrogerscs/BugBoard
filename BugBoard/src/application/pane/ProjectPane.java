@@ -1,24 +1,60 @@
 package application.pane;
 
+import application.controller.EditProjectController;
+import application.project.Project;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 
 /**
  * ProjectPane displays project information inside a container.
  */
 public class ProjectPane extends HBox {
-   Label name;
-   Label date;
+   Project project;
+   Label name, date;
+   Button edit;
+   HBox buttonPane;
    
-   public ProjectPane(String name, String date) {
-      this.name = new Label(name);
-      this.date = new Label(date);
+   public ProjectPane(Project project) {
+      this.project = project;
+      name = new Label(this.project.getName());
+      date = new Label(this.project.getDate().toString());
+      edit = new Button("Edit");
+      buttonPane = new HBox();
       
-      getChildren().addAll(this.name, this.date);
+      buttonPane.setAlignment(Pos.CENTER_RIGHT);
+      setHgrow(buttonPane, Priority.ALWAYS);
       
-      // Set style class.
+      // Set button behavior.
+      edit.setOnAction(event -> {
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/edit_project.fxml"));
+            Parent root = loader.load();
+            EditProjectController controller = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            
+            stage.setScene(scene);
+            stage.show();
+            controller.setProject(this.project);
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+      });
+      
+      buttonPane.getChildren().add(edit);
+      getChildren().addAll(this.name, this.date, buttonPane);
+      
       this.name.getStyleClass().add("project-pane-label");
       this.date.getStyleClass().add("project-pane-label");
-      getStyleClass().add("project-pane");
+      edit.getStyleClass().add("edit-button");
+      getStyleClass().add("info-pane");
    }
 }

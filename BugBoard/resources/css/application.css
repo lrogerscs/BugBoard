@@ -3,11 +3,34 @@
    src: url("../font/HammersmithOne-Regular.ttf");
 }
 
+.base-pane {
+   -fx-pref-width: 1600;
+   -fx-pref-height: 900;
+   -fx-background-color: #ffffff;
+}
+
+.logo-pane {
+   -fx-pref-width: 250;
+   -fx-pref-height: 130;
+   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 5);
+   -fx-padding: 0 0 0 25;
+   -fx-spacing: 10;
+   -fx-background-color: #ffffff;
+   -fx-background-radius: 0 0 100 0;
+}
+
 .label {
    -fx-font-family: "Hammersmith One";
    -fx-font-size: 16;
    -fx-alignment: center-left;
    -fx-text-fill: #373737;
+}
+
+.time-label {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 11;
+   -fx-alignment: center-left;
+   -fx-text-fill: #BBBBBB;
 }
 
 .button {
@@ -19,6 +42,33 @@
 }
 
 .button:pressed {
+   -fx-background-color: #00b395;
+}
+
+.edit-button {
+   -fx-pref-width: 80;
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-text-fill: #ffffff;
+   -fx-background-color: #069BFF;
+   -fx-background-radius: 10;
+   -fx-padding: 5;
+}
+
+.edit-button:pressed {
+   -fx-background-color: #007acc;
+}
+
+.new-comment-button {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-text-fill: #373737;
+   -fx-background-color: #06FFD5;
+   -fx-background-radius: 10;
+   -fx-padding: 5;
+}
+
+.new-comment-button:pressed {
    -fx-background-color: #00b395;
 }
 
@@ -44,6 +94,32 @@
    -fx-background-color: #EEEFEF;
 }
 
+.combo-box {
+   -fx-border-color: transparent;
+   -fx-background-color: #EEEFEF;
+   -fx-background-radius: 5;
+}
+
+.combo-box .list-cell {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-text-fill: #BBBBBB;
+}
+
+.combo-box .list-view {
+   -fx-background-insets: 0;
+   -fx-background-radius: 5;
+}
+
+.combo-box .list-view .list-cell {
+   -fx-background-color: #ffffff;
+   -fx-background-radius: 5;
+}
+
+.combo-box .list-view .list-cell:filled:hover {
+   -fx-background-color: #EEEFEF;
+}
+
 .date-picker {
    -fx-font-family: "Hammersmith One";
    -fx-font-size: 14;
@@ -61,7 +137,8 @@
    -fx-background-color: #373737;
 }
 
-.project-pane {
+.info-pane {
+   -fx-alignment: center-left;
    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 5);
    -fx-padding: 10;
    -fx-spacing: 10;
@@ -73,4 +150,8 @@
    -fx-alignment: center-left;
    -fx-pref-width: 200;
    -fx-max-width: 200;
+}
+
+.desc-box {
+   -fx-pref-height: 100;
 }

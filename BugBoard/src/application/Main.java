@@ -13,9 +13,7 @@ public class Main extends Application {
    @Override
    public void start(Stage stage) {
       try {
-         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/home.fxml"));
-         Scene scene = new Scene(fxmlLoader.load());
-         
+         Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml")));
          stage.getIcons().add(new Image(getClass().getClassLoader().getResource("image/BugBoardIcon.png").toExternalForm()));
          stage.setTitle("BugBoard");
          stage.setScene(scene);

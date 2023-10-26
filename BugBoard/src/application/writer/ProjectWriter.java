@@ -18,7 +18,7 @@ public class ProjectWriter {
       try {
          FileOutputStream stream = new FileOutputStream(localFilePath);
          for (Project project : projects)
-            stream.write((project.getName() + "," + project.getDate().toString() + "," + project.getDescription() + "\n").getBytes());
+            stream.write((project.getName() + "," + project.getDate().toString() + "," + project.getDesc() + "\n").getBytes());
          stream.close();
       } catch (Exception e) {
          e.printStackTrace();

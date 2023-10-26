@@ -1,13 +1,13 @@
 package application.controller;
 
 import java.net.URL;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import application.project.Project;
 import application.reader.ProjectReader;
-import application.writer.ProjectWriter;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,41 +15,31 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/**
- * NewProjectController controls the behavior of new_project.fxml.
- */
-public class NewProjectController implements Initializable {
+public class NewTicketController implements Initializable {
    @FXML
-   private DatePicker datePicker;
+   private ComboBox<String> projectComboBox;
    
    @FXML
-   private TextField projectName;
-
+   private TextField ticketTitle;
+   
    @FXML
-   private TextArea projectDesc;
+   private TextArea ticketDesc;
    
    private ProjectReader projectReader;
-   private ProjectWriter projectWriter;
-   private List<Project> projects;
+   private List<String> projectNames;
    
-   /**
-    * On action, switches the current view to the home view.
-    * @param event Action event.
-    */
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
-         if (projectName.getText() == null || projectName.getText().isEmpty() || datePicker.getValue() == null)
+         if (projectComboBox.getValue() == null || ticketTitle.getText() == null || ticketTitle.getText().isEmpty())
             return;
          
-         // Save data.
-         projects.add(new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText()));
-         projectWriter.writeProjects(projects, "./data/project_data.csv");
+         // TODO: Save ticket information here.
          
          Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
          Scene scene = new Scene(root);
@@ -64,9 +54,11 @@ public class NewProjectController implements Initializable {
    @Override
    public void initialize(URL location, ResourceBundle resources) {
       projectReader = new ProjectReader();
-      projectWriter = new ProjectWriter();
+      projectNames = new ArrayList<String>();
       
-      projects = projectReader.readProjects("./data/project_data.csv");
-      datePicker.setValue(LocalDate.now());
+      // Initialize projects for ComboBox.
+      for (Project project : projectReader.readProjects("./data/project_data.csv"))
+         projectNames.add(project.getName());
+      projectComboBox.setItems(FXCollections.observableArrayList(projectNames));
    }
 }
