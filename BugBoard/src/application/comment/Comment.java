@@ -24,7 +24,7 @@ public class Comment
 		return date;
 	}
 	
-	public void setDescription(LocalDate date)
+	public void setDate(LocalDate date)
 	{
 		this.date = date;
 	}
