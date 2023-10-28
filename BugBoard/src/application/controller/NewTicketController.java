@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.comment.Comment;
 import application.project.Project;
 import application.reader.ProjectReader;
+import application.reader.TicketReader;
+import application.ticket.Ticket;
+import application.writer.TicketWriter;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +24,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * NewTicketController controls the behavior of new_ticket.fxml.
+ */
 public class NewTicketController implements Initializable {
    @FXML
    private ComboBox<String> projectComboBox;
@@ -31,15 +38,24 @@ public class NewTicketController implements Initializable {
    private TextArea ticketDesc;
    
    private ProjectReader projectReader;
+   private TicketReader ticketReader;
+   private TicketWriter ticketWriter;
+   private List<Ticket> tickets;
    private List<String> projectNames;
    
+   /**
+    * On action, saves information and switches to the home view.
+    * @param event Action event.
+    */
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
          if (projectComboBox.getValue() == null || ticketTitle.getText() == null || ticketTitle.getText().isEmpty())
             return;
          
-         // TODO: Save ticket information here.
+         // Save ticket information.
+         tickets.add(new Ticket(projectComboBox.getValue(), ticketTitle.getText(), ticketDesc.getText(), new ArrayList<Comment>()));
+         ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
          
          Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
          Scene scene = new Scene(root);
@@ -54,6 +70,9 @@ public class NewTicketController implements Initializable {
    @Override
    public void initialize(URL location, ResourceBundle resources) {
       projectReader = new ProjectReader();
+      ticketReader = new TicketReader();
+      ticketWriter = new TicketWriter();
+      tickets = ticketReader.readTickets("./data/ticket_data.csv");
       projectNames = new ArrayList<String>();
       
       // Initialize projects for ComboBox.

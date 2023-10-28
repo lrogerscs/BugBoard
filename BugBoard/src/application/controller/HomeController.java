@@ -7,12 +7,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import application.pane.ProjectPane;
 import application.project.Project;
 import application.reader.ProjectReader;
+import application.reader.TicketReader;
+import application.ticket.Ticket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +29,9 @@ public class HomeController implements Initializable {
    private VBox projectPanelPane;
    
    private ProjectReader projectReader;
+   private TicketReader ticketReader;
    private List<Project> projects;
+   private List<Ticket> tickets;
    
    /**
     * On action, switches the current view to the new project view.
@@ -64,10 +69,20 @@ public class HomeController implements Initializable {
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
-      // Add projects to the display.
       projectReader = new ProjectReader();
+      ticketReader = new TicketReader();
       projects = projectReader.readProjects("./data/project_data.csv");
-      for (Project project : projects)
+      tickets = ticketReader.readTickets("./data/ticket_data.csv");
+      
+      // Add tickets to projects, add projects to the display.
+      for (Project project : projects) {
+         List<Ticket> projectTickets = new ArrayList<Ticket>();
+         for (Ticket ticket : tickets) {
+            if (ticket.getProjectName().equals(project.getName()))
+               projectTickets.add(ticket);
+         }
+         project.setTickets(projectTickets);
          projectPanelPane.getChildren().add(new ProjectPane(project));
+      }
    }
 }

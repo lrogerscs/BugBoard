@@ -22,10 +22,9 @@ public class ProjectReader {
       
       try {
          List<String> lines = Files.readAllLines(Paths.get(localFilePath));
-         String[] data;
          
          for (String line : lines) {
-            data = line.split(",");
+            String[] data = line.split(",");
             
             if (data.length < 2)
                return projects;

@@ -17,6 +17,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * TicketPane displays ticket information/options inside of a container.
+ */
 public class TicketPane extends VBox {
    Project project;
    TextField ticketTitle;
@@ -48,7 +51,7 @@ public class TicketPane extends VBox {
             
             stage.setScene(scene);
             stage.show();
-            controller.setProjectTicket(project, ticket);
+            controller.setProjectTicket(this.project, ticket);
          } catch (Exception e) {
             e.printStackTrace();
          }

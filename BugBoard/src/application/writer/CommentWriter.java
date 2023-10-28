@@ -11,20 +11,15 @@ import application.comment.Comment;
 public class CommentWriter {
     /**
      * Writes comment data.
-     *
-     * @param comments      Comments to write.
+     * @param comments Comments to write.
      * @param localFilePath Destination file path.
      */
     public void writeComments(List<Comment> comments, String localFilePath) {
         try {
             FileOutputStream stream = new FileOutputStream(localFilePath);
-            for (Comment comment : comments) {
-                StringBuilder data = new StringBuilder();
-                data.append(comment.getText()).append(",");
-                data.append(comment.getDate().toString()).append("\n");
-
-                stream.write(data.toString().getBytes());
-            }
+            
+            // TODO: Write comment data here.
+            
             stream.close();
         } catch (Exception e) {
             e.printStackTrace();

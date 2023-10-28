@@ -22,15 +22,9 @@ public class CommentReader {
 
         try {
             List<String> lines = Files.readAllLines(Paths.get(localFilePath));
-            String[] data;
-
-            if (lines.size() < 1)
-                return comments;
-
-            for (String line : lines) {
-                data = line.split(",");
-                comments.add(new Comment());
-            }
+            
+            // TODO: Read comment data here.
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -14,7 +14,7 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 /**
- * ProjectPane displays project information inside a container.
+ * ProjectPane displays project information/options inside a container.
  */
 public class ProjectPane extends HBox {
    Project project;

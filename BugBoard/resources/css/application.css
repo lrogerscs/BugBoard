@@ -12,7 +12,7 @@
 .logo-pane {
    -fx-pref-width: 250;
    -fx-pref-height: 130;
-   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 5);
+   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 0.0);
    -fx-padding: 0 0 0 25;
    -fx-spacing: 10;
    -fx-background-color: #ffffff;
@@ -139,7 +139,7 @@
 
 .info-pane {
    -fx-alignment: center-left;
-   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 5);
+   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 0.0);
    -fx-padding: 10;
    -fx-spacing: 10;
    -fx-background-color: #ffffff;

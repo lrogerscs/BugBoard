@@ -16,6 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * NewCommentController controls the behavior of new_comment.fxml.
+ */
 public class NewCommentController {
    @FXML
    private TextField ticketTitle;
@@ -34,6 +37,10 @@ public class NewCommentController {
    
    private Project project;
    
+   /**
+    * On action, switches the current view to the edit project view.
+    * @param event Action event.
+    */
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
@@ -56,6 +63,11 @@ public class NewCommentController {
       }
    }
    
+   /**
+    * Sets the project, ticket to be displayed.
+    * @param project Project to be displayed.
+    * @param ticket Ticket to be displayed.
+    */
    public void setProjectTicket(Project project, Ticket ticket) {
       this.project = project;
       ticketTitle.setText(ticket.getTitle());

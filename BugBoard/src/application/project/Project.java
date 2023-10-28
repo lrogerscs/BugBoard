@@ -1,6 +1,7 @@
 package application.project;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import application.ticket.Ticket;
@@ -59,10 +60,9 @@ public class Project
 		return tickets;
 	}
 	
-	public void setTickets()
+	public void setTickets(List<Ticket> tickets)
 	{
-		//TODO
-		//Needs logic to add and remove ticket objects from the tickets List
+	   this.tickets = tickets;
 	}
 	
 	public boolean getEmpty()

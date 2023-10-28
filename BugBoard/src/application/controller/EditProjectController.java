@@ -20,6 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * EditProjectController controls the behavior of edit_project.fxml.
+ */
 public class EditProjectController {
    @FXML
    private TextField projectName;
@@ -35,6 +38,10 @@ public class EditProjectController {
    
    private Project project;
    
+   /**
+    * On action, switches the current view to the home view.
+    * @param event Action event.
+    */
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
@@ -48,19 +55,24 @@ public class EditProjectController {
       }
    }
    
+   /**
+    * Sets the project to be displayed.
+    * @param project Project to be displayed.
+    */
    public void setProject(Project project) {
       this.project = project;
       projectName.setText(this.project.getName());
       projectStartDate.setValue(this.project.getDate());
       projectDesc.setText(this.project.getDesc());
       
-      // Placeholder code until ticket saving is in place.
+      // Placeholder code until comment saving is in place.
       List<Comment> comments = new ArrayList<Comment>();
-      comments.add(new Comment("A new test comment!", LocalDateTime.now()));
-      comments.add(new Comment("A second new test comment!", LocalDateTime.now()));
-      Ticket ticket = new Ticket("Anonymous Project", "Test Ticket", "A test ticket!", comments);
+      comments.add(new Comment("Placeholder comment. (Comment saving not available.)", LocalDateTime.now()));
       
       ticketPanelPane.getChildren().clear();
-      ticketPanelPane.getChildren().add(new TicketPane(project, ticket));
+      for (Ticket ticket : project.getTickets()) {
+         ticket.setComments(comments);
+         ticketPanelPane.getChildren().add(new TicketPane(project, ticket));
+      }
    }
 }
