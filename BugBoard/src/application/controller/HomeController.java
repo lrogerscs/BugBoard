@@ -3,6 +3,8 @@ package application.controller;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -27,6 +29,9 @@ import javafx.fxml.Initializable;
 public class HomeController implements Initializable {
    @FXML
    private VBox projectPanelPane;
+   
+   @FXML
+   private TextField searchBar;
    
    private ProjectReader projectReader;
    private TicketReader ticketReader;
@@ -66,6 +71,10 @@ public class HomeController implements Initializable {
          e.printStackTrace();
       }
    }
+   
+   private List<Project> search(String subString) {
+      // TODO: Search projects, tickets. Return projects with matching names/ticket titles.
+   }
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
@@ -84,5 +93,12 @@ public class HomeController implements Initializable {
          project.setTickets(projectTickets);
          projectPanelPane.getChildren().add(new ProjectPane(project));
       }
+      
+      // Set search behavior.
+      searchBar.setOnKeyPressed(event -> {
+         if (event.getCode() == KeyCode.ENTER) {
+            // TODO: Call search function, display matching projects/tickets.
+         }
+      });
    }
 }
