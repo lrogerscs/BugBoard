@@ -27,7 +27,7 @@ public class CommentReader {
             {
             	String[] data = line.split(",");
             	
-            	comments.add(new Comment(data[0], LocalDateTime.parse(data[1]), data[2]));
+            	comments.add(new Comment(data[0], data[1], LocalDateTime.parse(data[2]), data[3]));
             }
             //End of TODO
         } catch (Exception e) {

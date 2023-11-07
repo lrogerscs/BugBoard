@@ -60,7 +60,7 @@ public class NewCommentController implements Initializable {
             return;
          
          // TODO: Save comment information here.
-         comments.add(new Comment(ticketTitle.getText(), LocalDateTime.parse(dateTime.getText()), commentDesc.getText()));
+         comments.add(new Comment(project.getName(), ticketTitle.getText(), LocalDateTime.parse(dateTime.getText()), commentDesc.getText()));
          commentWriter.writeComments(comments, "./data/comment_data.csv");
          //Debug line to check if the proper project is being attributed to the given ticket/comment
          System.out.println(project.getName());

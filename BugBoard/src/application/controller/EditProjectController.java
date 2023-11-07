@@ -65,9 +65,9 @@ public class EditProjectController {
       projectStartDate.setValue(this.project.getDate());
       projectDesc.setText(this.project.getDesc());
       
-      // Placeholder code until comment saving is in place. Second line needs to replace null with name of corresponding ticket
+      // Placeholder code until comment saving is in place. Second line needs to replace null with name of corresponding proejct and ticket
       List<Comment> comments = new ArrayList<Comment>();
-      comments.add(new Comment(null, LocalDateTime.now(), "Placeholder comment. (Comment saving not available.)"));
+      comments.add(new Comment(null, null, LocalDateTime.now(), "Placeholder comment. (Comment saving not available.)"));
       
       ticketPanelPane.getChildren().clear();
       for (Ticket ticket : project.getTickets()) {

@@ -6,14 +6,26 @@ import java.time.LocalDateTime;
  */
 public class Comment
 {
+	private String projectName;
 	private String ticketName;
 	private LocalDateTime dateTime;
 	private String desc;
 	
-	public Comment(String ticketName, LocalDateTime date, String desc) {
+	public Comment(String projectName, String ticketName, LocalDateTime date, String desc) {
+		this.projectName = projectName;
 		this.ticketName = ticketName;
 		this.dateTime = date;
 		this.desc = desc;
+	}
+	
+	public String getProjectName()
+	{
+		return projectName;
+	}
+	
+	public void setProjectName(String projectName)
+	{
+		this.projectName = projectName;
 	}
 	
 	public String getTicketName()
