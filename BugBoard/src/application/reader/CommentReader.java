@@ -2,7 +2,7 @@ package application.reader;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +22,14 @@ public class CommentReader {
 
         try {
             List<String> lines = Files.readAllLines(Paths.get(localFilePath));
-            
             // TODO: Read comment data here.
-            
+            for (String line:lines)
+            {
+            	String[] data = line.split(",");
+            	
+            	comments.add(new Comment(LocalDateTime.parse(data[0]), data[1]));
+            }
+            //End of TODO
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,7 +9,7 @@ public class Comment
 	private String desc;
 	private LocalDateTime dateTime;
 	
-	public Comment(String desc, LocalDateTime date) {
+	public Comment(LocalDateTime date, String desc) {
 	   this.desc = desc;
 	   this.dateTime = date;
 	}

@@ -67,7 +67,7 @@ public class EditProjectController {
       
       // Placeholder code until comment saving is in place.
       List<Comment> comments = new ArrayList<Comment>();
-      comments.add(new Comment("Placeholder comment. (Comment saving not available.)", LocalDateTime.now()));
+      comments.add(new Comment(LocalDateTime.now(), "Placeholder comment. (Comment saving not available.)"));
       
       ticketPanelPane.getChildren().clear();
       for (Ticket ticket : project.getTickets()) {

@@ -17,10 +17,14 @@ public class CommentWriter {
     public void writeComments(List<Comment> comments, String localFilePath) {
         try {
             FileOutputStream stream = new FileOutputStream(localFilePath);
-            
             // TODO: Write comment data here.
-            
+            for (Comment comment : comments)
+            {
+            	stream.write((comment.getDateTime() + "," + comment.getDesc() + "\n").getBytes());
+            }
             stream.close();
+            //End of TODO
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
