@@ -6,22 +6,24 @@ import java.time.LocalDateTime;
  */
 public class Comment
 {
-	private String desc;
+	private String ticketName;
 	private LocalDateTime dateTime;
+	private String desc;
 	
-	public Comment(LocalDateTime date, String desc) {
-	   this.desc = desc;
-	   this.dateTime = date;
+	public Comment(String ticketName, LocalDateTime date, String desc) {
+		this.ticketName = ticketName;
+		this.dateTime = date;
+		this.desc = desc;
 	}
 	
-	public String getDesc()
+	public String getTicketName()
 	{
-		return desc;
+		return ticketName;
 	}
 	
-	public void setDesc(String text)
+	public void setTicketName(String ticketName)
 	{
-		this.desc = text;
+		this.ticketName = ticketName;
 	}
 	
 	public LocalDateTime getDateTime()
@@ -32,6 +34,16 @@ public class Comment
 	public void setDateTime(LocalDateTime date)
 	{
 		this.dateTime = date;
+	}
+	
+	public String getDesc()
+	{
+		return desc;
+	}
+	
+	public void setDesc(String text)
+	{
+		this.desc = text;
 	}
 	
 }

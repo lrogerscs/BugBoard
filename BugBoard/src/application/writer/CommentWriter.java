@@ -20,7 +20,7 @@ public class CommentWriter {
             // TODO: Write comment data here.
             for (Comment comment : comments)
             {
-            	stream.write((comment.getDateTime() + "," + comment.getDesc() + "\n").getBytes());
+            	stream.write((comment.getTicketName() + "," + comment.getDateTime() + "," + comment.getDesc() + "\n").getBytes());
             }
             stream.close();
             //End of TODO
