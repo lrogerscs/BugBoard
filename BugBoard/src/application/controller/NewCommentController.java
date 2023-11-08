@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import application.comment.Comment;
 import application.pane.CommentPane;
+import application.pane.TicketPane;
 import application.project.Project;
 import application.reader.CommentReader;
 import application.ticket.Ticket;
@@ -47,6 +48,7 @@ public class NewCommentController implements Initializable {
    private CommentWriter commentWriter;
    private CommentReader commentReader;
    private List<Comment> comments;
+   private boolean debug = false;
    //End of TODO
    
    /**
@@ -63,8 +65,11 @@ public class NewCommentController implements Initializable {
          comments.add(new Comment(project.getName(), ticketTitle.getText(), LocalDateTime.parse(dateTime.getText()), commentDesc.getText()));
          commentWriter.writeComments(comments, "./data/comment_data.csv");
          //Debug line to check if the proper project is being attributed to the given ticket/comment
-         System.out.println(project.getName());
-         System.out.println(ticketTitle.getText());
+         if (debug == true)
+         {
+        	 System.out.println(project.getName());
+        	 System.out.println(ticketTitle.getText());
+         }
          //End of TODO
          
          FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/edit_project.fxml"));
@@ -98,7 +103,6 @@ public class NewCommentController implements Initializable {
    @Override
    public void initialize(URL location, ResourceBundle resources)
    {
-	   boolean debug = false;
 	   //Creating read/write objects and populating comments[] with data from comment_data.csv
 	   commentReader = new CommentReader();
 	   commentWriter = new CommentWriter();
@@ -115,6 +119,13 @@ public class NewCommentController implements Initializable {
 	   //Initialize comments for commentPanelPane; Maybe add ticketTitle instance var to Comment class and accordingly change CommentReader/CommentWriter, all to track where each comment belongs
 	   //The appropriate project/ticket is being assigned by setProjectTicket before the code in onSaveButtonClick() executes so we can use that to pass them as args to new CommentReader/Writer
 	   //HomeController initialize() is where the projects are assigned their tickets with some data reading logic
+	   for (Comment comment : comments)
+	   {
+		   if (comment.getTicketName().equals(ticketTitle.getText()))
+		   {
+			   System.out.println("Match");
+		   }
+	   }
    }
    //End of TODO
 }
