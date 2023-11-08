@@ -74,6 +74,23 @@ public class HomeController implements Initializable {
    
    private List<Project> search(String subString) {
       // TODO: Search projects, tickets. Return projects with matching names/ticket titles.
+	   List<Project> matchingProjects = new ArrayList<>();
+
+	    for (Project p : projects) {
+	        if (p.getName().contains(subString)) {
+	            matchingProjects.add(p);
+	        } else {
+	            for (Ticket ticket : p.getTickets()) {
+	                if (ticket.getTitle().contains(subString)) {
+	                    matchingProjects.add(p);
+	                    break; 	                
+	                  
+	                    }
+	            }
+	        }
+	    }
+
+	    return matchingProjects;
    }
 
    @Override
