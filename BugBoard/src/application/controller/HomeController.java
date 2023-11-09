@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.comment.Comment;
 import application.pane.ProjectPane;
 import application.project.Project;
+import application.reader.CommentReader;
 import application.reader.ProjectReader;
 import application.reader.TicketReader;
 import application.ticket.Ticket;
@@ -30,8 +32,10 @@ public class HomeController implements Initializable {
    
    private ProjectReader projectReader;
    private TicketReader ticketReader;
+   private CommentReader commentReader;
    private List<Project> projects;
    private List<Ticket> tickets;
+   private List<Comment> comments;
    
    /**
     * On action, switches the current view to the new project view.
@@ -71,10 +75,12 @@ public class HomeController implements Initializable {
    public void initialize(URL location, ResourceBundle resources) {
       projectReader = new ProjectReader();
       ticketReader = new TicketReader();
+      commentReader = new CommentReader();
       projects = projectReader.readProjects("./data/project_data.csv");
       tickets = ticketReader.readTickets("./data/ticket_data.csv");
+      comments = commentReader.readComments("./data/comment_data.csv");
       
-      // Add tickets to projects, add projects to the display.
+      /** Add tickets to projects, add projects to the display.
       for (Project project : projects) {
          List<Ticket> projectTickets = new ArrayList<Ticket>();
          for (Ticket ticket : tickets) {
@@ -83,6 +89,49 @@ public class HomeController implements Initializable {
          }
          project.setTickets(projectTickets);
          projectPanelPane.getChildren().add(new ProjectPane(project));
-      }
+      }**/
+      
+      //Add tickets to project, add comments to tickets, add projects to the display.
+      for (Project project : projects) {
+          List<Ticket> projectTickets = new ArrayList<Ticket>();
+          for (Ticket ticket : tickets) {
+        	 List<Comment> ticketComments = new ArrayList<Comment>();
+        	 for (Comment comment: comments)
+        	 {
+        		 if (comment.getTicketName().equals(ticket.getTitle()) & comment.getProjectName().equals(ticket.getProjectName()))
+        		 {
+        			 ticketComments.add(comment);
+        		 }
+        	 }
+             if (ticket.getProjectName().equals(project.getName()))
+                projectTickets.add(ticket);
+             ticket.setComments(ticketComments);
+          }
+          project.setTickets(projectTickets);
+          projectPanelPane.getChildren().add(new ProjectPane(project));
+       }
+      
+      //Debug print to check if comments are properly stored in their tickets
+      Boolean debug = false;
+      if (debug == true)
+      {
+    	  for (Project project: projects)
+	      {
+	    	  System.out.println(project.getName());
+	    	  List<Ticket> tickets = project.getTickets();
+	    	  for (Ticket ticket: tickets)
+	    	  {
+	    		  System.out.println(ticket.getTitle());
+	    		  List<Comment> comments = ticket.getComments();
+	    		  for (Comment comment: comments)
+	    		  {
+	    			  System.out.println(comment.getDesc());
+	    		  }
+	    	  }
+	    	  System.out.println("");
+	      }
+      }//end of debug print
+      
+      
    }
 }

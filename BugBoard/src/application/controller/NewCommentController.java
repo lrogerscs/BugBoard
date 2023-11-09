@@ -107,25 +107,6 @@ public class NewCommentController implements Initializable {
 	   commentReader = new CommentReader();
 	   commentWriter = new CommentWriter();
 	   comments = commentReader.readComments("./data/comment_data.csv");
-	   //Debug line
-	   if (debug == true)
-	   {
-		   for (Comment comment: comments)
-	       {
-	      	 System.out.println(comment.getDesc());
-	       }
-	   }
-	   
-	   //Initialize comments for commentPanelPane; Maybe add ticketTitle instance var to Comment class and accordingly change CommentReader/CommentWriter, all to track where each comment belongs
-	   //The appropriate project/ticket is being assigned by setProjectTicket before the code in onSaveButtonClick() executes so we can use that to pass them as args to new CommentReader/Writer
-	   //HomeController initialize() is where the projects are assigned their tickets with some data reading logic
-	   for (Comment comment : comments)
-	   {
-		   if (comment.getTicketName().equals(ticketTitle.getText()))
-		   {
-			   System.out.println("Match");
-		   }
-	   }
    }
    //End of TODO
 }
