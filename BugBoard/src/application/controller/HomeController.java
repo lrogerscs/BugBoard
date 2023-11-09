@@ -72,25 +72,21 @@ public class HomeController implements Initializable {
       }
    }
    
-   private List<Project> search(String subString) {
-      // TODO: Search projects, tickets. Return projects with matching names/ticket titles.
+   private List<Project> search(String substring) {
 	   List<Project> matchingProjects = new ArrayList<>();
-
-	    for (Project p : projects) {
-	        if (p.getName().contains(subString)) {
-	            matchingProjects.add(p);
-	        } else {
-	            for (Ticket ticket : p.getTickets()) {
-	                if (ticket.getTitle().contains(subString)) {
-	                    matchingProjects.add(p);
-	                    break; 	                
-	                  
-	                    }
+	   for (Project p : projects) {
+	      if (p.getName().toLowerCase().contains(substring.toLowerCase()))
+	         matchingProjects.add(p);
+	      else {
+	         for (Ticket ticket : p.getTickets()) {
+	            if (ticket.getTitle().toLowerCase().contains(substring.toLowerCase())) {
+	               matchingProjects.add(p);
+	               break;
 	            }
-	        }
-	    }
-
-	    return matchingProjects;
+	         }
+	      }
+	   }
+	   return matchingProjects;
    }
 
    @Override
@@ -114,7 +110,10 @@ public class HomeController implements Initializable {
       // Set search behavior.
       searchBar.setOnKeyPressed(event -> {
          if (event.getCode() == KeyCode.ENTER) {
-            // TODO: Call search function, display matching projects/tickets.
+            List<Project> matchingProjects = search(searchBar.getText());
+            projectPanelPane.getChildren().clear();
+            for (Project project : matchingProjects)
+               projectPanelPane.getChildren().add(new ProjectPane(project));
          }
       });
    }
