@@ -19,21 +19,22 @@ public class CommentReader {
      */
     public List<Comment> readComments(String localFilePath) {
         List<Comment> comments = new ArrayList<Comment>();
-
+        
         try {
             List<String> lines = Files.readAllLines(Paths.get(localFilePath));
-            // TODO: Read comment data here.
-            for (String line:lines)
-            {
+            
+            for (String line : lines) {
             	String[] data = line.split(",");
             	
-            	comments.add(new Comment(data[0], LocalDateTime.parse(data[1]), data[2]));
+            	if (data.length < 2)
+                  return comments;
+            	
+            	comments.add(new Comment(data[0], data[1], LocalDateTime.parse(data[2]), data[3]));
             }
-            //End of TODO
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         return comments;
     }
 }

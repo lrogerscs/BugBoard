@@ -137,6 +137,36 @@
    -fx-background-color: #373737;
 }
 
+.scroll-pane {
+   -fx-background-insets: 0;
+   -fx-padding: 0;
+   -fx-background-color: #ffffff;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+   -fx-background-color: #BBBBBB;
+}
+
+.scroll-bar:vertical .thumb:pressed {
+   -fx-background-color: #373737;
+}
+
+.scroll-bar:vertical > .increment-button > .increment-arrow {
+   -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical > .decrement-button > .decrement-arrow {
+   -fx-background-color: transparent;
+}
+
 .info-pane {
    -fx-alignment: center-left;
    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.1, 0.0, 0.0);
@@ -154,4 +184,11 @@
 
 .desc-box {
    -fx-pref-height: 100;
+   -fx-min-height: 80;
+}
+
+.ticket-scroll-pane {
+   -fx-border-style: solid hidden solid hidden; 
+   -fx-border-color: #f5f5f5; 
+   -fx-border-width: 1.5
 }

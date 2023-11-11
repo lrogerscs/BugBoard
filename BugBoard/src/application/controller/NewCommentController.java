@@ -43,11 +43,10 @@ public class NewCommentController implements Initializable {
    private VBox commentPanelPane;
    
    private Project project;
-   //TODO add instance vars for read/write
+   private Ticket ticket;
    private CommentWriter commentWriter;
    private CommentReader commentReader;
    private List<Comment> comments;
-   //End of TODO
    
    /**
     * On action, switches the current view to the edit project view.
@@ -59,13 +58,12 @@ public class NewCommentController implements Initializable {
          if (commentDesc.getText() == null || commentDesc.getText().isEmpty())
             return;
          
-         // TODO: Save comment information here.
-         comments.add(new Comment(ticketTitle.getText(), LocalDateTime.parse(dateTime.getText()), commentDesc.getText()));
+         // Save new comment.
+         Comment comment = new Comment(project.getName(), ticketTitle.getText()
+               , LocalDateTime.parse(dateTime.getText()), commentDesc.getText());
+         ticket.getComments().add(comment);
+         comments.add(comment);
          commentWriter.writeComments(comments, "./data/comment_data.csv");
-         //Debug line to check if the proper project is being attributed to the given ticket/comment
-         System.out.println(project.getName());
-         System.out.println(ticketTitle.getText());
-         //End of TODO
          
          FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/edit_project.fxml"));
          Parent root = loader.load();
@@ -88,33 +86,18 @@ public class NewCommentController implements Initializable {
     */
    public void setProjectTicket(Project project, Ticket ticket) {
       this.project = project;
+      this.ticket = ticket;
       ticketTitle.setText(ticket.getTitle());
       ticketDesc.setText(ticket.getDescription());
       dateTime.setText(LocalDateTime.now().toString());
       commentPanelPane.getChildren().add(new CommentPane(ticket.getComments()));
    }
    
-   //TODO add initialize method
    @Override
-   public void initialize(URL location, ResourceBundle resources)
-   {
-	   boolean debug = false;
-	   //Creating read/write objects and populating comments[] with data from comment_data.csv
-	   commentReader = new CommentReader();
+   public void initialize(URL location, ResourceBundle resources) {
+	   // Creating read/write objects and populating comments[] with data from comment_data.csv
 	   commentWriter = new CommentWriter();
+	   commentReader = new CommentReader();
 	   comments = commentReader.readComments("./data/comment_data.csv");
-	   //Debug line
-	   if (debug == true)
-	   {
-		   for (Comment comment: comments)
-	       {
-	      	 System.out.println(comment.getDesc());
-	       }
-	   }
-	   
-	   //Initialize comments for commentPanelPane; Maybe add ticketTitle instance var to Comment class and accordingly change CommentReader/CommentWriter, all to track where each comment belongs
-	   //The appropriate project/ticket is being assigned by setProjectTicket before the code in onSaveButtonClick() executes so we can use that to pass them as args to new CommentReader/Writer
-	   //HomeController initialize() is where the projects are assigned their tickets with some data reading logic
    }
-   //End of TODO
 }

@@ -65,7 +65,6 @@ public class NewProjectController implements Initializable {
    public void initialize(URL location, ResourceBundle resources) {
       projectReader = new ProjectReader();
       projectWriter = new ProjectWriter();
-      
       projects = projectReader.readProjects("./data/project_data.csv");
       datePicker.setValue(LocalDate.now());
    }
