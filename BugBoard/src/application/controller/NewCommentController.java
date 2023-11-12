@@ -113,19 +113,20 @@ public class NewCommentController implements Initializable {
       ticketTitle.setText(ticket.getTitle());
       ticketDesc.setText(ticket.getDescription());
       dateTime.setText(LocalDateTime.now().toString());
-      commentPanelPane.getChildren().add(new CommentPane(ticket.getComments()));
+      if (ticket.getComments().size() > 0)
+         commentPanelPane.getChildren().add(new CommentPane(ticket.getComments()));
    }
    
    @Override
    public void initialize(URL location, ResourceBundle resources) {
       commentPanelPane = new VBox();
-	   commentWriter = new CommentWriter();
-	   commentReader = new CommentReader();
-	   
-	   comments = commentReader.readComments("./data/comment_data.csv");
-	   commentPanelPane.setStyle("-fx-padding: 10; -fx-spacing: 10;");
-	   commentScrollPane.setFitToHeight(true);
+      commentWriter = new CommentWriter();
+      commentReader = new CommentReader();
+
+      comments = commentReader.readComments("./data/comment_data.csv");
+      commentPanelPane.setStyle("-fx-padding: 10; -fx-spacing: 10;");
+      commentScrollPane.setFitToHeight(true);
       commentScrollPane.setFitToWidth(true);
-	   commentScrollPane.setContent(commentPanelPane);
+      commentScrollPane.setContent(commentPanelPane);
    }
 }

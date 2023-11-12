@@ -84,22 +84,22 @@ public class HomeController implements Initializable {
     * @param substring Substring to be matched.
     */
    private void search(String substring) {
-	   List<Project> matchingProjects = new ArrayList<>();
-	   
-	   for (Project p : projects) {
-	      if (p.getName().toLowerCase().contains(substring.toLowerCase()))
-	         matchingProjects.add(p);
-	      else if (searchPreferenceBar.getValue().equals("Projects, Tickets")) {
-	         for (Ticket ticket : p.getTickets()) {
-	            if (ticket.getTitle().toLowerCase().contains(substring.toLowerCase())) {
-	               matchingProjects.add(p);
-	               break;
-	            }
-	         }
-	      }
-	   }
-	   
-	   projectPanelPane.getChildren().clear();
+      List<Project> matchingProjects = new ArrayList<>();
+
+      for (Project p : projects) {
+         if (p.getName().toLowerCase().contains(substring.toLowerCase()))
+            matchingProjects.add(p);
+         else if (searchPreferenceBar.getValue().equals("Projects, Tickets")) {
+            for (Ticket ticket : p.getTickets()) {
+               if (ticket.getTitle().toLowerCase().contains(substring.toLowerCase())) {
+                  matchingProjects.add(p);
+                  break;
+               }
+            }
+         }
+      }
+
+      projectPanelPane.getChildren().clear();
       for (Project project : matchingProjects)
          projectPanelPane.getChildren().add(new ProjectPane(project));
    }
