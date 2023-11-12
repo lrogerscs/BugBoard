@@ -2,31 +2,31 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="TOP_CENTER" prefHeight="900" prefWidth="1600" style="-fx-background-color: #ffffff;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HomeController">
    <children>
-      <HBox prefHeight="65.0" prefWidth="1600.0">
+      <HBox prefHeight="16.0" prefWidth="1600.0" styleClass="top-pane">
          <children>
             <HBox prefHeight="100.0" prefWidth="800.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="250.0" spacing="10.0" styleClass="logo-pane">
+                  <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="250.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0">
                            <image>
                               <Image url="@../image/BugBoardIcon.png" />
                            </image>
                         </ImageView>
-                        <Label style="-fx-font-size: 30;" text="BugBoard" />
+                        <Label style="-fx-font-size: 25;" text="BugBoard" />
                      </children>
                      <padding>
-                        <Insets left="25.0" />
+                        <Insets left="10.0" />
                      </padding>
                   </HBox>
                </children>
@@ -42,15 +42,16 @@
             </HBox>
          </children>
       </HBox>
-      <HBox prefHeight="120.0" prefWidth="1600.0" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="90.0" prefWidth="1600.0" />
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="1600.0" spacing="10.0">
          <children>
-            <AnchorPane prefHeight="100.0" prefWidth="289.0">
-               <children>
-                  <TextField fx:id="searchBar" layoutX="30.0" layoutY="8.0" prefHeight="31.0" prefWidth="170.0" promptText="Search" />
-               </children>
-            </AnchorPane>
+            <TextField fx:id="searchBar" prefHeight="31.0" prefWidth="159.0" promptText="Search" />
+            <Label text="in" />
+            <ComboBox fx:id="searchPreferenceBar" prefHeight="31.0" prefWidth="135.0" />
          </children>
+         <padding>
+            <Insets left="25.0" />
+         </padding>
       </HBox>
       <HBox prefHeight="30.0" prefWidth="1600.0" spacing="10.0">
          <children>
@@ -68,7 +69,7 @@
             <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
          </padding>
       </HBox>
-      <VBox fx:id="projectPanelPane" prefHeight="563.0" prefWidth="1600.0" spacing="10.0">
+      <VBox fx:id="projectPanelPane" prefHeight="583.0" prefWidth="1600.0" spacing="10.0">
          <padding>
             <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
          </padding></VBox>

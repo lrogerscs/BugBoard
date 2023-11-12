@@ -38,7 +38,7 @@ public class NewProjectController implements Initializable {
    private List<Project> projects;
    
    /**
-    * On action, switches the current view to the home view.
+    * On action, (if possible) saves information then switches to the home view.
     * @param event Action event.
     */
    @FXML
@@ -51,6 +51,23 @@ public class NewProjectController implements Initializable {
          projects.add(new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText()));
          projectWriter.writeProjects(projects, "./data/project_data.csv");
          
+         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+         stage.show();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   /**
+    * On action, switches the current view to the home view.
+    * @param event Action event.
+    */
+   @FXML
+   private void onCancelButtonClick(ActionEvent event) {
+      try {
          Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
          Scene scene = new Scene(root);
          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

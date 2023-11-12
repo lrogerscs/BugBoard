@@ -57,6 +57,23 @@ public class EditProjectController implements Initializable {
    }
    
    /**
+    * On action, switches the current view to the home view.
+    * @param event Action event.
+    */
+   @FXML
+   private void onCancelButtonClick(ActionEvent event) {
+      try {
+         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+         stage.show();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   /**
     * Sets the project to be displayed.
     * @param project Project to be displayed.
     */

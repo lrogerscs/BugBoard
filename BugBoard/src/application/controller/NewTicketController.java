@@ -44,7 +44,7 @@ public class NewTicketController implements Initializable {
    private List<String> projectNames;
    
    /**
-    * On action, saves information and switches to the home view.
+    * On action, (if possible) saves information then switches to the home view.
     * @param event Action event.
     */
    @FXML
@@ -57,6 +57,23 @@ public class NewTicketController implements Initializable {
          tickets.add(new Ticket(projectComboBox.getValue(), ticketTitle.getText(), ticketDesc.getText(), new ArrayList<Comment>()));
          ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
          
+         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+         stage.show();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   /**
+    * On action, switches the current view to the home view.
+    * @param event Action event.
+    */
+   @FXML
+   private void onCancelButtonClick(ActionEvent event) {
+      try {
          Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
          Scene scene = new Scene(root);
          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

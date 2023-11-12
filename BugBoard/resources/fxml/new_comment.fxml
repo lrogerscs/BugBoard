@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -12,21 +13,21 @@
 
 <VBox styleClass="base-pane" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.NewCommentController">
    <children>
-      <HBox prefHeight="65.0" prefWidth="1600.0">
+      <HBox prefHeight="16.0" prefWidth="1600.0" styleClass="top-pane">
          <children>
             <HBox prefHeight="100.0" prefWidth="800.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="250.0" spacing="10.0" styleClass="logo-pane">
+                  <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="250.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0">
                            <image>
                               <Image url="@../image/BugBoardIcon.png" />
                            </image>
                         </ImageView>
-                        <Label style="-fx-font-size: 30;" text="BugBoard" />
+                        <Label style="-fx-font-size: 25;" text="BugBoard" />
                      </children>
                      <padding>
-                        <Insets left="25.0" />
+                        <Insets left="10.0" />
                      </padding>
                   </HBox>
                </children>
@@ -38,9 +39,9 @@
             </HBox>
          </children>
       </HBox>
-      <VBox prefHeight="770.0" prefWidth="100.0" spacing="10.0">
+      <VBox prefHeight="862.0" prefWidth="1600.0" spacing="10.0">
          <children>
-            <Label style="-fx-font-size: 25;" text="Project Information" />
+            <Label style="-fx-font-size: 25;" text="Create a New Comment" />
             <HBox prefHeight="765.0" prefWidth="1580.0">
                <children>
                   <VBox prefHeight="139.0" prefWidth="790.0">
@@ -93,7 +94,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </HBox>
-                        <VBox fx:id="commentPanelPane" prefHeight="757.0" prefWidth="790.0" />
+                        <ScrollPane fx:id="commentScrollPane" prefHeight="811.0" prefWidth="790.0" styleClass="comment-scroll-pane" />
                      </children>
                   </VBox>
                </children>
@@ -105,9 +106,10 @@
       </VBox>
       <HBox prefHeight="65.0" prefWidth="1600.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="800.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="800.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onSaveButtonClick" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#onCancelButtonClick" styleClass="cancel-button" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#onSaveButtonClick" styleClass="save-button" text="Save" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -1,13 +1,5 @@
 package application.controller;
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +12,18 @@ import application.reader.CommentReader;
 import application.reader.ProjectReader;
 import application.reader.TicketReader;
 import application.ticket.Ticket;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * HomeController controls the behavior of home.fxml.
@@ -34,6 +34,9 @@ public class HomeController implements Initializable {
    
    @FXML
    private TextField searchBar;
+   
+   @FXML
+   private ComboBox<String> searchPreferenceBar;
    
    private ProjectReader projectReader;
    private TicketReader ticketReader;
@@ -76,12 +79,17 @@ public class HomeController implements Initializable {
       }
    }
    
-   private List<Project> search(String substring) {
+   /**
+    * Searches projects (and tickets if specified) and displays search results.
+    * @param substring Substring to be matched.
+    */
+   private void search(String substring) {
 	   List<Project> matchingProjects = new ArrayList<>();
+	   
 	   for (Project p : projects) {
 	      if (p.getName().toLowerCase().contains(substring.toLowerCase()))
 	         matchingProjects.add(p);
-	      else {
+	      else if (searchPreferenceBar.getValue().equals("Projects, Tickets")) {
 	         for (Ticket ticket : p.getTickets()) {
 	            if (ticket.getTitle().toLowerCase().contains(substring.toLowerCase())) {
 	               matchingProjects.add(p);
@@ -90,7 +98,10 @@ public class HomeController implements Initializable {
 	         }
 	      }
 	   }
-	   return matchingProjects;
+	   
+	   projectPanelPane.getChildren().clear();
+      for (Project project : matchingProjects)
+         projectPanelPane.getChildren().add(new ProjectPane(project));
    }
 
    @Override
@@ -122,11 +133,11 @@ public class HomeController implements Initializable {
       }
       
       // Set search behavior.
-      searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
-         List<Project> matchingProjects = search(searchBar.getText());
-         projectPanelPane.getChildren().clear();
-         for (Project project : matchingProjects)
-            projectPanelPane.getChildren().add(new ProjectPane(project));
-      });
+      searchBar.textProperty().addListener((observable, oldValue, newValue) -> search(searchBar.getText()));
+      searchPreferenceBar.valueProperty().addListener((observable, oldValue, newValue) -> search(searchBar.getText()));
+      
+      // Set search preferences.
+      searchPreferenceBar.setItems(FXCollections.observableArrayList("Projects", "Projects, Tickets"));
+      searchPreferenceBar.setValue("Projects");
    }
 }
