@@ -71,6 +71,18 @@
    -fx-background-color: #007acc;
 }
 
+.delete-button {
+   -fx-pref-width: 80;
+   -fx-text-fill: #ffffff;
+   -fx-background-color: #FF068B;
+   -fx-background-radius: 10;
+   -fx-padding: 5;
+}
+
+.delete-button:pressed {
+   -fx-background-color: #cc006d;
+}
+
 .new-comment-button {
    -fx-font-family: "Hammersmith One";
    -fx-font-size: 14;
