@@ -2,6 +2,7 @@ package application.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -102,6 +103,76 @@ public class HomeController implements Initializable {
       projectPanelPane.getChildren().clear();
       for (Project project : matchingProjects)
          projectPanelPane.getChildren().add(new ProjectPane(project));
+   }
+   
+   /**
+    * Deletes project in projects, tickets and comments by matching project names
+    * @param project
+    */
+   public void deleteProject(Project project)
+   {
+	   //Initializing list of projects, tickets and comments to remove. Avoiding a ConcurrentModificationException by creating these lists
+	   List<Project> removeProjects = new ArrayList<Project>();
+	   List<Ticket> removeTickets = new ArrayList<Ticket>();
+	   List<Comment> removeComments = new ArrayList<Comment>();
+	   
+	   //Adding all comments, tickets, and the project to be removed to the above Lists
+	   for (Project i: projects)
+	   {
+		   if (project.equals(i))
+		   {
+			   removeProjects.add(i);
+		   }
+	   }
+	   for (Ticket j: tickets)
+	   {
+		   if (j.getProjectName().equals(project.getName()))
+		   {
+			   removeTickets.add(j);
+		   }
+	   }
+	   for (Comment k: comments)
+	   {
+		   if (k.getProjectName().equals(project.getName()))
+		   {
+			   removeComments.add(k);
+		   }
+	   }
+	   
+	   //Printing out all remove lists for debugging
+	   for (Project f: removeProjects)
+	   {
+		   System.out.println(f.getName());
+	   }
+	   for (Ticket j: removeTickets)
+	   {
+		   System.out.println(j.getTitle());
+	   }
+	   for (Comment k: removeComments)
+	   {
+		   System.out.println(k.getDesc());
+	   }
+	   
+	   System.out.println("\n");
+	   
+	   //comments.removeAll(Arrays.asList(removeComments.toArray()));
+	   comments.removeAll(removeComments);
+	   tickets.removeAll(removeTickets);
+	   projects.removeAll(removeProjects);
+	   
+	   //Printing out all projects, tickets and commments for debugging
+	   for (Project f: projects)
+	   {
+		   System.out.println(f.getName());
+	   }
+	   for (Ticket j: tickets)
+	   {
+		   System.out.println(j.getTitle());
+	   }
+	   for (Comment k: comments)
+	   {
+		   System.out.println(k.getDesc());
+	   }
    }
 
    @Override

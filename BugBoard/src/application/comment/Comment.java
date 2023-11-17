@@ -58,4 +58,19 @@ public class Comment
 		this.desc = text;
 	}
 	
+	public boolean equals(Comment comment)
+	{
+		boolean equals;
+		
+		if (projectName.equals(comment.getProjectName()) & ticketName.equals(comment.getTicketName()) & dateTime.equals(comment.getDateTime()) & desc.equals(comment.getDesc()))
+		{
+			equals = true;
+		}
+		else
+		{
+			equals = false;
+		}
+		
+		return equals;
+	}
 }

@@ -50,7 +50,7 @@
                         <HBox spacing="10.0">
                            <children>
                               <Label text="Project Name:" />
-                              <TextField fx:id="projectName" editable="false" focusTraversable="false" />
+                              <TextField fx:id="projectName" editable="true" focusTraversable="false" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -59,7 +59,7 @@
                         <HBox spacing="10.0">
                            <children>
                               <Label text="Start Date:" />
-                              <DatePicker fx:id="projectStartDate" editable="false" mouseTransparent="true" />
+                              <DatePicker fx:id="projectStartDate" editable="true" mouseTransparent="true" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -68,7 +68,7 @@
                         <VBox prefHeight="224.0" prefWidth="1580.0" spacing="10.0">
                            <children>
                               <Label text="Project Description:" />
-                              <TextArea fx:id="projectDesc" editable="false" maxHeight="200.0" maxWidth="500.0" prefHeight="200.0" prefWidth="500.0" styleClass="text-area" />
+                              <TextArea fx:id="projectDesc" editable="true" maxHeight="200.0" maxWidth="500.0" prefHeight="200.0" prefWidth="500.0" styleClass="text-area" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

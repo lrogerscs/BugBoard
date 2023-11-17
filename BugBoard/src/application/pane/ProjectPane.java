@@ -1,6 +1,9 @@
 package application.pane;
 
+import java.io.IOException;
+
 import application.controller.EditProjectController;
+import application.controller.HomeController;
 import application.project.Project;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +38,7 @@ public class ProjectPane extends HBox {
       
       // Set button behavior.
       edit.setOnAction(event -> loadEditProject(event));
+      delete.setOnAction(event -> deleteProject(event));
       
       buttonPane.getChildren().addAll(edit, delete);
       getChildren().addAll(this.name, this.date, buttonPane);
@@ -44,6 +48,25 @@ public class ProjectPane extends HBox {
       edit.getStyleClass().add("edit-button");
       delete.getStyleClass().add("delete-button");
       getStyleClass().add("info-pane");
+   }
+   
+   //This method is calling the public deleteProject() method in HomeController and passing the reference of the project being deleted
+   private void deleteProject(ActionEvent event)
+   {
+	   try
+	   {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/home.fxml"));
+		Parent root = fxmlLoader.load();
+		HomeController homeController = fxmlLoader.getController();
+		homeController.deleteProject(project);
+	   }
+	   catch (Exception e)
+	   {
+		   e.printStackTrace();
+	   }
+	   
+	   //String projectName = project.getName();
+	   //System.out.println("Delete " + projectName + " button pushed");
    }
    
    private void loadEditProject(ActionEvent event) {

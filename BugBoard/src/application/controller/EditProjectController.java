@@ -54,6 +54,8 @@ public class EditProjectController implements Initializable {
       } catch (Exception e) {
          e.printStackTrace();
       }
+      
+      
    }
    
    /**

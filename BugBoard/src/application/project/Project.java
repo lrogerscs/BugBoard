@@ -74,4 +74,20 @@ public class Project
 	{
 		this.empty = empty;
 	}
+	
+	public boolean equals(Project project)
+	{
+		boolean equals;
+		
+		if (name.equals(project.getName()) & startDate.equals(project.getDate()) & desc.equals(project.getDesc()))
+		{
+			equals = true;
+		}
+		else
+		{
+			equals = false;
+		}
+		
+		return equals;
+	}
 }

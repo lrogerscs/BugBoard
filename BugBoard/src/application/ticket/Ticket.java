@@ -59,5 +59,21 @@ public class Ticket
 	{
 		this.comments = comments;
 	}
+	
+	public boolean equals(Ticket ticket)
+	{
+		boolean equals;
+		
+		if (projectName.equals(ticket.getProjectName()) & title.equals(ticket.getTitle()) & description.equals(ticket.getDescription()))
+		{
+			equals = true;
+		}
+		else
+		{
+			equals = false;
+		}
+		
+		return equals;
+	}
 
 }
