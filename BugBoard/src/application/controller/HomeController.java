@@ -13,6 +13,9 @@ import application.reader.CommentReader;
 import application.reader.ProjectReader;
 import application.reader.TicketReader;
 import application.ticket.Ticket;
+import application.writer.CommentWriter;
+import application.writer.ProjectWriter;
+import application.writer.TicketWriter;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +45,9 @@ public class HomeController implements Initializable {
    private ProjectReader projectReader;
    private TicketReader ticketReader;
    private CommentReader commentReader;
+   private ProjectWriter projectWriter;
+   private TicketWriter ticketWriter;
+   private CommentWriter commentWriter;
    private List<Project> projects;
    private List<Ticket> tickets;
    private List<Comment> comments;
@@ -139,40 +145,15 @@ public class HomeController implements Initializable {
 		   }
 	   }
 	   
-	   //Printing out all remove lists for debugging
-	   for (Project f: removeProjects)
-	   {
-		   System.out.println(f.getName());
-	   }
-	   for (Ticket j: removeTickets)
-	   {
-		   System.out.println(j.getTitle());
-	   }
-	   for (Comment k: removeComments)
-	   {
-		   System.out.println(k.getDesc());
-	   }
-	   
-	   System.out.println("\n");
-	   
-	   //comments.removeAll(Arrays.asList(removeComments.toArray()));
+	   //Removing the items to be deleted from the project, ticket and comment lists
 	   comments.removeAll(removeComments);
 	   tickets.removeAll(removeTickets);
 	   projects.removeAll(removeProjects);
 	   
-	   //Printing out all projects, tickets and commments for debugging
-	   for (Project f: projects)
-	   {
-		   System.out.println(f.getName());
-	   }
-	   for (Ticket j: tickets)
-	   {
-		   System.out.println(j.getTitle());
-	   }
-	   for (Comment k: comments)
-	   {
-		   System.out.println(k.getDesc());
-	   }
+	   //Rewriting the data csv's wiith the new lists
+	   projectWriter.writeProjects(projects, "./data/project_data.csv");
+	   ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
+	   commentWriter.writeComments(comments, "./data/comment_data.csv");
    }
 
    @Override
@@ -183,6 +164,9 @@ public class HomeController implements Initializable {
       projects = projectReader.readProjects("./data/project_data.csv");
       tickets = ticketReader.readTickets("./data/ticket_data.csv");
       comments = commentReader.readComments("./data/comment_data.csv");
+      projectWriter = new ProjectWriter();
+      ticketWriter = new TicketWriter();
+      commentWriter = new CommentWriter();
       
       // Add tickets to projects, add comments to tickets, add projects to the display.
       for (Project project : projects) {
