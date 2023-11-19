@@ -73,4 +73,20 @@ public class Comment
 		
 		return equals;
 	}
+	
+	public boolean nameEquals(String string)
+	{
+		boolean equals;
+		
+		if (projectName.equals(string))
+		{
+			equals = true;
+		}
+		else
+		{
+			equals = false;
+		}
+		
+		return equals;
+	}
 }

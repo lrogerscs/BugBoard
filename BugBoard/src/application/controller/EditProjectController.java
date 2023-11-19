@@ -2,13 +2,15 @@ package application.controller;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
+import application.comment.Comment;
 import application.pane.TicketPane;
 import application.project.Project;
-import application.reader.ProjectReader;
+import application.reader.*;
 import application.ticket.Ticket;
-import application.writer.ProjectWriter;
+import application.writer.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +66,34 @@ public class EditProjectController implements Initializable {
             }
          }
          projectWriter.writeProjects(projects, "./data/project_data.csv");
+         
+         //Rewriting ticket data
+         TicketReader ticketReader = new TicketReader();
+         TicketWriter ticketWriter = new TicketWriter();
+         List<Ticket> tickets = ticketReader.readTickets("./data/ticket_data.csv");
+         //Checking for tickets with the old project name to update them with the new name, then writing them to ticket_data.csv
+         for (Ticket t: tickets)
+         {
+        	 if (t.nameEquals(project.getName()))
+        	 {
+        		 t.setProjectName(projectName.getText());
+        	 }
+         }
+         ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
+         
+         //Rewriting comment data
+         CommentReader commentReader = new CommentReader();
+         CommentWriter commentWriter = new CommentWriter();
+         List<Comment> comments = commentReader.readComments("./data/comment_data.csv");
+        //Checking for comments with the old project name, updating them with the new name and writing it to comment_data.csv
+         for (Comment c: comments)
+         {
+        	 if (c.nameEquals(project.getName()))
+        	 {
+        		 c.setProjectName(projectName.getText());
+        	 }
+         }
+         commentWriter.writeComments(comments, "./data/comment_data.csv");
          
          Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml"));
          Scene scene = new Scene(root);

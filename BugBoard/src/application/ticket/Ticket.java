@@ -25,7 +25,7 @@ public class Ticket
 		return projectName;
 	}
 
-	public void setName(String name) 
+	public void setProjectName(String name) 
 	{
 		this.projectName = name;
 	}
@@ -65,6 +65,22 @@ public class Ticket
 		boolean equals;
 		
 		if (projectName.equals(ticket.getProjectName()) & title.equals(ticket.getTitle()) & description.equals(ticket.getDescription()))
+		{
+			equals = true;
+		}
+		else
+		{
+			equals = false;
+		}
+		
+		return equals;
+	}
+	
+	public boolean nameEquals(String string)
+	{
+		boolean equals;
+		
+		if (projectName.equals(string))
 		{
 			equals = true;
 		}
