@@ -1,11 +1,8 @@
 package application.pane;
 
-import java.io.IOException;
-
 import application.controller.EditProjectController;
 import application.controller.HomeController;
 import application.project.Project;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
@@ -52,28 +48,23 @@ public class ProjectPane extends HBox {
       getStyleClass().add("info-pane");
    }
    
-   //This method is calling the public deleteProject() method in HomeController and passing the reference of the project being deleted
-   private void deleteProject(ActionEvent event)
-   {
-	   try
-	   {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/home.fxml"));
-		Parent root = fxmlLoader.load();
-		HomeController homeController = fxmlLoader.getController();
-		homeController.deleteProject(project);
-        
-		//Refreshing the home page
-        Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/home.fxml")));
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.getIcons().add(new Image(getClass().getClassLoader().getResource("image/BugBoardIcon.png").toExternalForm()));
-        stage.setTitle("BugBoard");
-        stage.setScene(scene);
-        stage.show();
-	   }
-	   catch (Exception e)
-	   {
-		   e.printStackTrace();
-	   }
+   // This method is calling the public deleteProject() method in HomeController
+   // and passing the reference of the project being deleted
+   private void deleteProject(ActionEvent event) {
+      try {
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/home.fxml"));
+         Parent root = fxmlLoader.load();
+         HomeController homeController = fxmlLoader.getController();
+         homeController.deleteProject(project);
+
+         // Load the home page
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+         stage.show();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
    }
    
    private void loadEditProject(ActionEvent event) {

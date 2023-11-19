@@ -4,6 +4,7 @@ import application.comment.Comment;
 import application.controller.NewCommentController;
 import application.project.Project;
 import application.ticket.Ticket;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
  */
 public class TicketPane extends VBox {
    Project project;
+   Ticket ticket;
    TextField ticketTitle;
    TextArea ticketDesc;
    Button newCommentButton;
@@ -29,8 +31,9 @@ public class TicketPane extends VBox {
    
    public TicketPane(Project project, Ticket ticket) {
       this.project = project;
-      ticketTitle = new TextField(ticket.getTitle());
-      ticketDesc = new TextArea(ticket.getDescription());
+      this.ticket = ticket;
+      ticketTitle = new TextField(this.ticket.getTitle());
+      ticketDesc = new TextArea(this.ticket.getDescription());
       newCommentButton = new Button("+ New Comment");
       ticketTitlePane = new HBox(new Label("Title:"), ticketTitle);
       buttonPane = new HBox(newCommentButton);
@@ -41,28 +44,14 @@ public class TicketPane extends VBox {
       buttonPane.setAlignment(Pos.CENTER_RIGHT);
       
       // Set button behavior.
-      newCommentButton.setOnAction(event -> {
-         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/new_comment.fxml"));
-            Parent root = loader.load();
-            NewCommentController controller = loader.getController();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            
-            stage.setScene(scene);
-            stage.show();
-            controller.setProjectTicket(this.project, ticket);
-         } catch (Exception e) {
-            e.printStackTrace();
-         }
-      });
+      newCommentButton.setOnAction(event -> loadNewComment(event));
       
       getChildren().addAll(ticketTitlePane, new Label("Description:"), ticketDesc, new Label("Comments:"));
       
       // Add comments to pane.
-      for (Comment comment : ticket.getComments()) {
-         TextArea commentDesc = new TextArea(comment.getDesc());
-         Label commentDateTime = new Label(comment.getDateTime().toString());
+      for (Comment c : this.ticket.getComments()) {
+         TextArea commentDesc = new TextArea(c.getDesc());
+         Label commentDateTime = new Label(c.getDateTime().toString());
          commentDesc.setEditable(false);
          commentDesc.getStyleClass().add("desc-box");
          commentDateTime.getStyleClass().add("time-label");
@@ -74,5 +63,21 @@ public class TicketPane extends VBox {
       ticketDesc.getStyleClass().add("desc-box");
       newCommentButton.getStyleClass().add("new-comment-button");
       getStyleClass().add("info-pane");
+   }
+   
+   private void loadNewComment(ActionEvent event) {
+      try {
+         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/new_comment.fxml"));
+         Parent root = loader.load();
+         NewCommentController controller = loader.getController();
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         
+         stage.setScene(scene);
+         stage.show();
+         controller.setProjectTicket(project, ticket);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
    }
 }

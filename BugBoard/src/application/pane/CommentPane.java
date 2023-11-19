@@ -12,9 +12,9 @@ import javafx.scene.layout.VBox;
  */
 public class CommentPane extends VBox {
    public CommentPane(List<Comment> comments) {
-      for (Comment comment : comments) {
-         TextArea commentDesc = new TextArea(comment.getDesc());
-         Label commentDateTime = new Label(comment.getDateTime().toString());
+      for (Comment c : comments) {
+         TextArea commentDesc = new TextArea(c.getDesc());
+         Label commentDateTime = new Label(c.getDateTime().toString());
          commentDesc.setEditable(false);
          commentDesc.getStyleClass().add("desc-box");
          commentDateTime.getStyleClass().add("time-label");

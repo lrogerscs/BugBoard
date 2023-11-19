@@ -93,8 +93,8 @@ public class NewTicketController implements Initializable {
       projectNames = new ArrayList<String>();
       
       // Initialize projects for ComboBox.
-      for (Project project : projectReader.readProjects("./data/project_data.csv"))
-         projectNames.add(project.getName());
+      for (Project p : projectReader.readProjects("./data/project_data.csv"))
+         projectNames.add(p.getName());
       projectComboBox.setItems(FXCollections.observableArrayList(projectNames));
    }
 }

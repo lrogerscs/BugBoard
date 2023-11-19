@@ -2,7 +2,6 @@ package application.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -107,53 +106,29 @@ public class HomeController implements Initializable {
       }
 
       projectPanelPane.getChildren().clear();
-      for (Project project : matchingProjects)
-         projectPanelPane.getChildren().add(new ProjectPane(project));
+      for (Project p : matchingProjects)
+         projectPanelPane.getChildren().add(new ProjectPane(p));
    }
    
    /**
     * Deletes project in projects, tickets and comments by matching project names
     * @param project
     */
-   public void deleteProject(Project project)
-   {
-	   //Initializing list of projects, tickets and comments to remove. Avoiding a ConcurrentModificationException by creating these lists
-	   List<Project> removeProjects = new ArrayList<Project>();
-	   List<Ticket> removeTickets = new ArrayList<Ticket>();
-	   List<Comment> removeComments = new ArrayList<Comment>();
-	   
-	   //Adding all comments, tickets, and the project to be removed to the above Lists
-	   for (Project i: projects)
-	   {
-		   if (project.equals(i))
-		   {
-			   removeProjects.add(i);
-		   }
-	   }
-	   for (Ticket j: tickets)
-	   {
-		   if (j.getProjectName().equals(project.getName()))
-		   {
-			   removeTickets.add(j);
-		   }
-	   }
-	   for (Comment k: comments)
-	   {
-		   if (k.getProjectName().equals(project.getName()))
-		   {
-			   removeComments.add(k);
-		   }
-	   }
-	   
-	   //Removing the items to be deleted from the project, ticket and comment lists
-	   comments.removeAll(removeComments);
-	   tickets.removeAll(removeTickets);
-	   projects.removeAll(removeProjects);
-	   
-	   //Rewriting the data csv's wiith the new lists
-	   projectWriter.writeProjects(projects, "./data/project_data.csv");
-	   ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
-	   commentWriter.writeComments(comments, "./data/comment_data.csv");
+   public void deleteProject(Project project) {
+      // Remove project data.
+      projects.removeIf(p -> p.equals(project));
+      tickets.removeIf(t -> t.getProjectName().equals(project.getName()));
+      comments.removeIf(c -> c.getProjectName().equals(project.getName()));
+
+      // Rewrite.
+      projectWriter.writeProjects(projects, "./data/project_data.csv");
+      ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
+      commentWriter.writeComments(comments, "./data/comment_data.csv");
+      
+      // Create new ProjectPane objects.
+      projectPanelPane.getChildren().clear();
+      for (Project p : projects)
+         projectPanelPane.getChildren().add(new ProjectPane(p));
    }
 
    @Override
@@ -161,30 +136,28 @@ public class HomeController implements Initializable {
       projectReader = new ProjectReader();
       ticketReader = new TicketReader();
       commentReader = new CommentReader();
-      projects = projectReader.readProjects("./data/project_data.csv");
-      tickets = ticketReader.readTickets("./data/ticket_data.csv");
-      comments = commentReader.readComments("./data/comment_data.csv");
       projectWriter = new ProjectWriter();
       ticketWriter = new TicketWriter();
       commentWriter = new CommentWriter();
+      projects = projectReader.readProjects("./data/project_data.csv");
+      tickets = ticketReader.readTickets("./data/ticket_data.csv");
+      comments = commentReader.readComments("./data/comment_data.csv");
       
       // Add tickets to projects, add comments to tickets, add projects to the display.
-      for (Project project : projects) {
+      for (Project p : projects) {
          List<Ticket> projectTickets = new ArrayList<Ticket>();
-         for (Ticket ticket : tickets) {
+         for (Ticket t : tickets) {
             List<Comment> ticketComments = new ArrayList<Comment>();
-            for (Comment comment : comments) {
-               if (comment.getTicketName().equals(ticket.getTitle()) 
-                     && comment.getProjectName().equals(ticket.getProjectName())) {
-                  ticketComments.add(comment);
-               }
+            for (Comment c : comments) {
+               if (c.getTicketName().equals(t.getTitle()) && c.getProjectName().equals(t.getProjectName()))
+                  ticketComments.add(c);
             }
-            if (ticket.getProjectName().equals(project.getName()))
-               projectTickets.add(ticket);
-            ticket.setComments(ticketComments);
+            if (t.getProjectName().equals(p.getName()))
+               projectTickets.add(t);
+            t.setComments(ticketComments);
          }
-         project.setTickets(projectTickets);
-         projectPanelPane.getChildren().add(new ProjectPane(project));
+         p.setTickets(projectTickets);
+         projectPanelPane.getChildren().add(new ProjectPane(p));
       }
       
       // Set search behavior.
