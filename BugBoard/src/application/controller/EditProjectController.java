@@ -54,7 +54,7 @@ public class EditProjectController implements Initializable {
          if (projectName.getText() == null || projectName.getText().isEmpty() || projectStartDate.getValue() == null)
             return;
          
-         // Save data.
+         // Save project data.
          ProjectReader projectReader = new ProjectReader();
          ProjectWriter projectWriter = new ProjectWriter();
          List<Project> projects = projectReader.readProjects("./data/project_data.csv");
@@ -67,31 +67,27 @@ public class EditProjectController implements Initializable {
          }
          projectWriter.writeProjects(projects, "./data/project_data.csv");
          
-         //Rewriting ticket data
+         // Rewriting ticket data
          TicketReader ticketReader = new TicketReader();
          TicketWriter ticketWriter = new TicketWriter();
          List<Ticket> tickets = ticketReader.readTickets("./data/ticket_data.csv");
-         //Checking for tickets with the old project name to update them with the new name, then writing them to ticket_data.csv
-         for (Ticket t: tickets)
-         {
-        	 if (t.nameEquals(project.getName()))
-        	 {
-        		 t.setProjectName(projectName.getText());
-        	 }
+         // Checking for tickets with the old project name to update them with the new
+         // name, then writing them to ticket_data.csv
+         for (Ticket t : tickets) {
+            if (t.nameEquals(project.getName()))
+               t.setProjectName(projectName.getText());
          }
          ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
-         
-         //Rewriting comment data
+
+         // Rewriting comment data
          CommentReader commentReader = new CommentReader();
          CommentWriter commentWriter = new CommentWriter();
          List<Comment> comments = commentReader.readComments("./data/comment_data.csv");
-        //Checking for comments with the old project name, updating them with the new name and writing it to comment_data.csv
-         for (Comment c: comments)
-         {
-        	 if (c.nameEquals(project.getName()))
-        	 {
-        		 c.setProjectName(projectName.getText());
-        	 }
+         // Checking for comments with the old project name, updating them with the new
+         // name and writing it to comment_data.csv
+         for (Comment c : comments) {
+            if (c.nameEquals(project.getName()))
+               c.setProjectName(projectName.getText());
          }
          commentWriter.writeComments(comments, "./data/comment_data.csv");
          
