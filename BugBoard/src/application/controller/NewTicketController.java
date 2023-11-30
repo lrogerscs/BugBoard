@@ -50,8 +50,15 @@ public class NewTicketController implements Initializable {
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
+         // Check violations.
          if (projectComboBox.getValue() == null || ticketTitle.getText() == null || ticketTitle.getText().isEmpty())
             return;
+         
+         for (Ticket t : tickets) {
+            if (t.getProjectName().equals(projectComboBox.getValue()) 
+                  && t.getTitle().toLowerCase().equals(ticketTitle.getText().toLowerCase()))
+               return;
+         }
          
          // Save ticket information.
          tickets.add(new Ticket(projectComboBox.getValue(), ticketTitle.getText(), ticketDesc.getText(), new ArrayList<Comment>()));

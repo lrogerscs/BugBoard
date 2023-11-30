@@ -111,7 +111,7 @@ public class NewCommentController implements Initializable {
       this.project = project;
       this.ticket = ticket;
       ticketTitle.setText(ticket.getTitle());
-      ticketDesc.setText(ticket.getDescription());
+      ticketDesc.setText(ticket.getDesc());
       dateTime.setText(LocalDateTime.now().toString());
       if (ticket.getComments().size() > 0)
          commentPanelPane.getChildren().add(new CommentPane(ticket.getComments()));

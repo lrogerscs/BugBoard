@@ -40,12 +40,12 @@ public class Ticket
 		this.title = title;
 	}
 	
-	public String getDescription()
+	public String getDesc()
 	{
 		return description;
 	}
 	
-	public void setDescription(String description)
+	public void setDesc(String description)
 	{
 		this.description = description;
 	}
@@ -64,7 +64,7 @@ public class Ticket
 	{
 		boolean equals;
 		
-		if (projectName.equals(ticket.getProjectName()) & title.equals(ticket.getTitle()) & description.equals(ticket.getDescription()))
+		if (projectName.equals(ticket.getProjectName()) & title.equals(ticket.getTitle()) & description.equals(ticket.getDesc()))
 		{
 			equals = true;
 		}

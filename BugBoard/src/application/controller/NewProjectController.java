@@ -44,8 +44,14 @@ public class NewProjectController implements Initializable {
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
+         // Check violations.
          if (projectName.getText() == null || projectName.getText().isEmpty() || datePicker.getValue() == null)
             return;
+         
+         for (Project p : projects) {
+            if (p.getName().toLowerCase().equals(projectName.getText().toLowerCase()))
+               return;
+         }
          
          // Save data.
          projects.add(new Project(projectName.getText(), datePicker.getValue(), projectDesc.getText()));

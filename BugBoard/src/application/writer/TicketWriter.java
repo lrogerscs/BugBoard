@@ -18,7 +18,7 @@ public class TicketWriter {
         try {
             FileOutputStream stream = new FileOutputStream(localFilePath);
             for (Ticket ticket : tickets)
-               stream.write((ticket.getProjectName() + "," + ticket.getTitle() + "," + ticket.getDescription() + "\n").getBytes());
+               stream.write((ticket.getProjectName() + "," + ticket.getTitle() + "," + ticket.getDesc() + "\n").getBytes());
             stream.close();
         } catch (Exception e) {
             e.printStackTrace();

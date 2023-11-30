@@ -2,15 +2,18 @@ package application.controller;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import application.comment.Comment;
 import application.pane.TicketPane;
 import application.project.Project;
-import application.reader.*;
+import application.reader.CommentReader;
+import application.reader.ProjectReader;
+import application.reader.TicketReader;
 import application.ticket.Ticket;
-import application.writer.*;
+import application.writer.CommentWriter;
+import application.writer.ProjectWriter;
+import application.writer.TicketWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,8 +44,17 @@ public class EditProjectController implements Initializable {
    @FXML
    private ScrollPane ticketScrollPane;
    
+   private ProjectReader projectReader;
+   private TicketReader ticketReader;
+   private CommentReader commentReader;
+   private ProjectWriter projectWriter;
+   private TicketWriter ticketWriter;
+   private CommentWriter commentWriter;
    private VBox ticketPanelPane;
    private Project project;
+   private List<Project> projects;
+   private List<Ticket> tickets;
+   private List<Comment> comments;
    
    /**
     * On action, (if possible) saves information then switches to the home view.
@@ -51,13 +63,20 @@ public class EditProjectController implements Initializable {
    @FXML
    private void onSaveButtonClick(ActionEvent event) {
       try {
+         // Check violations.
          if (projectName.getText() == null || projectName.getText().isEmpty() || projectStartDate.getValue() == null)
             return;
          
+         for (int i = 0; i < project.getTickets().size(); i++) {
+            if (((TicketPane) ticketPanelPane.getChildren().get(i)).getTitleField().isEmpty())
+               return;
+            for (int j = 0; j < project.getTickets().get(i).getComments().size(); j++) {
+               if (((TicketPane) ticketPanelPane.getChildren().get(i)).getCommentField(j).isEmpty())
+                  return;
+            }
+         }
+         
          // Save project data.
-         ProjectReader projectReader = new ProjectReader();
-         ProjectWriter projectWriter = new ProjectWriter();
-         List<Project> projects = projectReader.readProjects("./data/project_data.csv");
          for (Project p : projects) {
             if (p.equals(project)) {
                p.setName(projectName.getText());
@@ -67,27 +86,34 @@ public class EditProjectController implements Initializable {
          }
          projectWriter.writeProjects(projects, "./data/project_data.csv");
          
-         // Rewriting ticket data
-         TicketReader ticketReader = new TicketReader();
-         TicketWriter ticketWriter = new TicketWriter();
-         List<Ticket> tickets = ticketReader.readTickets("./data/ticket_data.csv");
-         // Checking for tickets with the old project name to update them with the new
-         // name, then writing them to ticket_data.csv
+         // Save ticket data.
          for (Ticket t : tickets) {
-            if (t.nameEquals(project.getName()))
+            if (t.nameEquals(project.getName())) {
                t.setProjectName(projectName.getText());
+               for (int i = 0; i < project.getTickets().size(); i++) {
+                  if (t.getTitle().equals(project.getTickets().get(i).getTitle())) {
+                     t.setTitle(((TicketPane) ticketPanelPane.getChildren().get(i)).getTitleField());
+                     t.setDesc(((TicketPane) ticketPanelPane.getChildren().get(i)).getDescField());
+                  }
+               }
+            }
          }
          ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
 
-         // Rewriting comment data
-         CommentReader commentReader = new CommentReader();
-         CommentWriter commentWriter = new CommentWriter();
-         List<Comment> comments = commentReader.readComments("./data/comment_data.csv");
-         // Checking for comments with the old project name, updating them with the new
-         // name and writing it to comment_data.csv
+         // Save comment data.
          for (Comment c : comments) {
-            if (c.nameEquals(project.getName()))
+            if (c.nameEquals(project.getName())) {
                c.setProjectName(projectName.getText());
+               for (int i = 0; i < project.getTickets().size(); i++) {
+                  if (c.getTicketName().equals(project.getTickets().get(i).getTitle())) {
+                     c.setTicketName(((TicketPane) ticketPanelPane.getChildren().get(i)).getTitleField());
+                     for (int j = 0; j < project.getTickets().get(i).getComments().size(); j++) {
+                        if (c.getDateTime().toString().equals(project.getTickets().get(i).getComments().get(j).getDateTime().toString()))
+                           c.setDesc(((TicketPane) ticketPanelPane.getChildren().get(i)).getCommentField(j));
+                     }
+                  }
+               }
+            }
          }
          commentWriter.writeComments(comments, "./data/comment_data.csv");
          
@@ -130,10 +156,40 @@ public class EditProjectController implements Initializable {
       for (Ticket t : project.getTickets())
          ticketPanelPane.getChildren().add(new TicketPane(project, t));
    }
+   
+   /**
+    * Deletes a given ticket from the system.
+    * @param ticket Ticket to be deleted.
+    */
+   public void deleteTicket(Ticket ticket) {
+      // Remove ticket data.
+      project.getTickets().removeIf(t -> t.getTitle().equals(ticket.getTitle()));
+      tickets.removeIf(t -> t.getTitle().equals(ticket.getTitle()) && t.getProjectName().equals(ticket.getProjectName()));
+      comments.removeIf(c -> c.getTicketName().equals(ticket.getTitle()) && c.getProjectName().equals(ticket.getProjectName()));
+      
+      // Rewrite.
+      ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
+      commentWriter.writeComments(comments, "./data/comment_data.csv");
+      
+      // Create new TicketPane objects.
+      ticketPanelPane.getChildren().clear();
+      for (Ticket t : project.getTickets())
+         ticketPanelPane.getChildren().add(new TicketPane(project, t));
+   }
 
    @Override
    public void initialize(URL location, ResourceBundle resources) {
+      projectReader = new ProjectReader();
+      ticketReader = new TicketReader();
+      commentReader = new CommentReader();
+      projectWriter = new ProjectWriter();
+      ticketWriter = new TicketWriter();
+      commentWriter = new CommentWriter();
+      projects = projectReader.readProjects("./data/project_data.csv");
+      tickets = ticketReader.readTickets("./data/ticket_data.csv");
+      comments = commentReader.readComments("./data/comment_data.csv");
       ticketPanelPane = new VBox();
+      
       ticketPanelPane.setStyle("-fx-padding: 10; -fx-spacing: 10;");
       ticketScrollPane.setFitToHeight(true);
       ticketScrollPane.setFitToWidth(true);

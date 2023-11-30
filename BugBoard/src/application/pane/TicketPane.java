@@ -1,6 +1,7 @@
 package application.pane;
 
 import application.comment.Comment;
+import application.controller.EditProjectController;
 import application.controller.NewCommentController;
 import application.project.Project;
 import application.ticket.Ticket;
@@ -26,43 +27,63 @@ public class TicketPane extends VBox {
    Ticket ticket;
    TextField ticketTitle;
    TextArea ticketDesc;
-   Button newCommentButton;
+   Button newCommentButton, deleteButton;
    HBox ticketTitlePane, buttonPane;
    
    public TicketPane(Project project, Ticket ticket) {
       this.project = project;
       this.ticket = ticket;
       ticketTitle = new TextField(this.ticket.getTitle());
-      ticketDesc = new TextArea(this.ticket.getDescription());
+      ticketDesc = new TextArea(this.ticket.getDesc());
       newCommentButton = new Button("+ New Comment");
+      deleteButton = new Button("Delete");
       ticketTitlePane = new HBox(new Label("Title:"), ticketTitle);
-      buttonPane = new HBox(newCommentButton);
+      buttonPane = new HBox(newCommentButton, deleteButton);
       
-      ticketTitle.setEditable(false);
-      ticketDesc.setEditable(false);
+      ticketTitle.setFocusTraversable(false);
+      ticketDesc.setFocusTraversable(false);
       ticketTitlePane.setSpacing(10);
+      buttonPane.setSpacing(10);
       buttonPane.setAlignment(Pos.CENTER_RIGHT);
       
       // Set button behavior.
       newCommentButton.setOnAction(event -> loadNewComment(event));
+      deleteButton.setOnAction(event -> deleteTicket(event));
       
       getChildren().addAll(ticketTitlePane, new Label("Description:"), ticketDesc, new Label("Comments:"));
       
       // Add comments to pane.
-      for (Comment c : this.ticket.getComments()) {
-         TextArea commentDesc = new TextArea(c.getDesc());
-         Label commentDateTime = new Label(c.getDateTime().toString());
-         commentDesc.setEditable(false);
-         commentDesc.getStyleClass().add("desc-box");
-         commentDateTime.getStyleClass().add("time-label");
-         getChildren().addAll(commentDesc, commentDateTime);
-      }
+      addComments();
       
       getChildren().add(buttonPane);
       
       ticketDesc.getStyleClass().add("desc-box");
       newCommentButton.getStyleClass().add("new-comment-button");
+      deleteButton.getStyleClass().add("delete-button");
       getStyleClass().add("info-pane");
+   }
+   
+   public String getTitleField() {
+      return ticketTitle.getText();
+   }
+   
+   public String getDescField() {
+      return ticketDesc.getText();
+   }
+   
+   public String getCommentField(int index) {
+      return ((TextArea) getChildren().get(4 + index * 2)).getText();
+   }
+   
+   private void addComments() {
+      for (Comment c : ticket.getComments()) {
+         TextArea commentDesc = new TextArea(c.getDesc());
+         Label commentDateTime = new Label(c.getDateTime().toString());
+         commentDesc.setFocusTraversable(false);
+         commentDesc.getStyleClass().add("desc-box");
+         commentDateTime.getStyleClass().add("time-label");
+         getChildren().addAll(commentDesc, commentDateTime);
+      }
    }
    
    private void loadNewComment(ActionEvent event) {
@@ -76,6 +97,23 @@ public class TicketPane extends VBox {
          stage.setScene(scene);
          stage.show();
          controller.setProjectTicket(project, ticket);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+   
+   private void deleteTicket(ActionEvent event) {
+      try {
+         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/edit_project.fxml"));
+         Parent root = loader.load();
+         EditProjectController controller = loader.getController();
+         Scene scene = new Scene(root);
+         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+         
+         stage.setScene(scene);
+         stage.show();
+         controller.setProject(project);
+         controller.deleteTicket(ticket);
       } catch (Exception e) {
          e.printStackTrace();
       }
