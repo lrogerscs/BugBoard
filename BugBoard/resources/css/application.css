@@ -41,6 +41,31 @@
    -fx-background-color: #00b395;
 }
 
+.menu-button {
+   -fx-pref-width: 80;
+   -fx-background-color: #069BFF;
+   -fx-background-radius: 10;
+}
+
+.menu-button:pressed {
+   -fx-background-color: #007acc;
+}
+
+.menu-button .label {
+   -fx-font-family: "Hammersmith One";
+   -fx-font-size: 14;
+   -fx-text-fill: #ffffff;
+   -fx-alignment: center;
+}
+
+.menu-button .arrow-button {
+   -fx-padding: 0;
+}
+
+.menu-button .arrow-button .arrow {
+   -fx-padding: 0;
+}
+
 .save-button {
    -fx-pref-width: 80;
    -fx-background-radius: 10;
@@ -193,13 +218,30 @@
    -fx-background-color: transparent;
 }
 
+.context-menu {
+   -fx-background-insets: 0;
+   -fx-background-radius: 5;
+}
+
+.menu-item {
+   -fx-background-radius: 5;
+}
+
+.menu-item .label {
+   -fx-text-fill: #808080;
+}
+
+.menu-item:focused {
+   -fx-background-color: #EEEFEF;
+}
+
 .scroll-pane {
    -fx-background-insets: 0;
    -fx-padding: 0;
    -fx-background-color: #ffffff;
 }
 
-.scroll-pane > .viewport {
+.scroll-pane .viewport {
    -fx-background-color: transparent;
 }
 
@@ -215,11 +257,11 @@
    -fx-background-color: #373737;
 }
 
-.scroll-bar:vertical > .increment-button > .increment-arrow {
+.scroll-bar:vertical .increment-button .increment-arrow {
    -fx-background-color: transparent;
 }
 
-.scroll-bar:vertical > .decrement-button > .decrement-arrow {
+.scroll-bar:vertical .decrement-button .decrement-arrow {
    -fx-background-color: transparent;
 }
 

@@ -1,6 +1,7 @@
 package application.controller;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -108,8 +109,11 @@ public class EditProjectController implements Initializable {
                   if (c.getTicketName().equals(project.getTickets().get(i).getTitle())) {
                      c.setTicketName(((TicketPane) ticketPanelPane.getChildren().get(i)).getTitleField());
                      for (int j = 0; j < project.getTickets().get(i).getComments().size(); j++) {
-                        if (c.getDateTime().toString().equals(project.getTickets().get(i).getComments().get(j).getDateTime().toString()))
+                        if (c.getDateTime().toString().equals(project.getTickets().get(i).getComments().get(j).getDateTime().toString())) {
+                           if (!c.getDesc().equals(((TicketPane) ticketPanelPane.getChildren().get(i)).getCommentField(j)))
+                              c.setDateTime(LocalDateTime.now());
                            c.setDesc(((TicketPane) ticketPanelPane.getChildren().get(i)).getCommentField(j));
+                        }
                      }
                   }
                }
@@ -154,7 +158,7 @@ public class EditProjectController implements Initializable {
       projectStartDate.setValue(this.project.getDate());
       projectDesc.setText(this.project.getDesc());
       for (Ticket t : project.getTickets())
-         ticketPanelPane.getChildren().add(new TicketPane(project, t));
+         ticketPanelPane.getChildren().add(new TicketPane(projects, project, t));
    }
    
    /**
@@ -174,7 +178,29 @@ public class EditProjectController implements Initializable {
       // Create new TicketPane objects.
       ticketPanelPane.getChildren().clear();
       for (Ticket t : project.getTickets())
-         ticketPanelPane.getChildren().add(new TicketPane(project, t));
+         ticketPanelPane.getChildren().add(new TicketPane(projects, project, t));
+   }
+   
+   public void moveTicket(String projectName, Ticket ticket) {
+      // Alter data.
+      project.getTickets().removeIf(t -> t.getTitle().equals(ticket.getTitle()));
+      for (Ticket t : tickets) {
+         if (t.getProjectName().equals(ticket.getProjectName()) && t.getTitle().equals(ticket.getTitle()))
+            t.setProjectName(projectName);
+      }
+      for (Comment c : comments) {
+         if (c.getProjectName().equals(ticket.getProjectName()) && c.getTicketName().equals(ticket.getTitle()))
+            c.setProjectName(projectName);
+      }
+      
+      // Rewrite.
+      ticketWriter.writeTickets(tickets, "./data/ticket_data.csv");
+      commentWriter.writeComments(comments, "./data/comment_data.csv");
+      
+      // Create new TicketPane objects.
+      ticketPanelPane.getChildren().clear();
+      for (Ticket t : project.getTickets())
+         ticketPanelPane.getChildren().add(new TicketPane(projects, project, t));
    }
 
    @Override
