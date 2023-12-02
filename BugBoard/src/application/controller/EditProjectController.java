@@ -181,6 +181,11 @@ public class EditProjectController implements Initializable {
          ticketPanelPane.getChildren().add(new TicketPane(projects, project, t));
    }
    
+   /**
+    * Moves a given ticket to a project.
+    * @param projectName Name of project.
+    * @param ticket Ticket to move.
+    */
    public void moveTicket(String projectName, Ticket ticket) {
       // Alter data.
       project.getTickets().removeIf(t -> t.getTitle().equals(ticket.getTitle()));
